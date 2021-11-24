@@ -1,0 +1,3 @@
+This is a random patient file containing HPO terms like vascular, cornea, diabetes.
+
+Something something Down Syndrome something something wax impaction 
