@@ -1,8 +1,9 @@
 import tkinter
 from tkinter import *
 from tkinter import filedialog
+import json
 
-mm_words = {"impaction", "diabetes", "Down Syndrome"}
+mm_words = set() #{"impaction", "diabetes", "Down Syndrome"}
 ctakes_words = {"vascular", "cornea", "Down Syndrome"}
 shared_words = []
 total_mmcount = 0
@@ -55,16 +56,36 @@ def update_display():
     for word in ctakes_words.difference(mm_words):
         highlight_word(word, "ctakes")
 
+def read_json(file):
+    note = json.loads(file)
+    terms = []
+
+    for doc in note["AllDocuments"]:
+        #print(doc)
+        for utterance in doc["Document"]["Utterances"]:
+            for phrase in utterance["Phrases"]:
+                if phrase["Mappings"]:
+                    for mapping in phrase["Mappings"]:
+                        for mc in mapping["MappingCandidates"]:
+                            # print(mc)
+                            if mc["Negated"] != 1:
+                                terms.append(" ".join(mc["MatchedWords"]))
+
+    print(terms)
+    return terms
+
 def update_mmdict():
-    pass
-    # tf = filedialog.askopenfilename(
-    #     initialdir="C:/Users/MainFrame/Desktop/",
-    #     title="Open Meta Map Output file",
-    #     filetypes=(("Text Files", "*.json"),)
-    # )
-    # pathh.insert(END, tf)
-    # tf = open(tf)
-    # file_cont = tf.read()
+    tf2 = filedialog.askopenfilename(
+        initialdir="C:/Users/MainFrame/Desktop/",
+        title="Open Meta Map Output file",
+        filetypes=(("Text Files", "*.json"),)
+    )
+    pathh.insert(END, tf2)
+    tf2 = open(tf2)
+    file_cont = tf2.read()
+
+    mm_words = set(read_json(file_cont))
+    print(mm_words)
     #
     # #PARSE FILE
     # txtarea.insert(END, file_cont)
@@ -105,7 +126,7 @@ def saveFile():
 
 ws = Tk()
 ws.title("Term Viewer")
-ws.geometry("1000x800")
+ws.geometry("800x600")
 ws['bg'] = '#2a636e'
 
 # adding frame
