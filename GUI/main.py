@@ -2,6 +2,7 @@ import tkinter
 from tkinter import *
 from tkinter import filedialog
 import json
+import xml.etree.ElementTree as et
 
 mm_words = set() #{"impaction", "diabetes", "Down Syndrome"}
 ctakes_words = {"vascular", "cornea", "Down Syndrome"}
@@ -11,6 +12,10 @@ total_ctakescount = 0
 total_count = 0
 ss_count = 0
 dd_count = 0
+
+txt_fp = ""
+mm_fp = ""
+ctakes_fp = ""
 
 # functions
 def openFile():
@@ -74,6 +79,26 @@ def read_json(file):
     print(terms)
     return terms
 
+def read_ctakes(f):
+    tree = et.parse(f)
+    d = tree.findall('.//{http:///org/apache/ctakes/typesystem/type/textsem.ecore}DiseaseDisorderMention')
+    s = tree.findall('.//{http:///org/apache/ctakes/typesystem/type/textsem.ecore}SignSymptomMention')
+    all_terms = d + s
+    f = open("C:/Users/nixona2/Documents/test_notes/10147920.txt", "r")
+    f = f.read()
+    terms = []
+    for p in all_terms:
+        if p.attrib['polarity'] != -1:
+            begin = int(p.attrib['begin'])
+            end = int(p.attrib['end'])
+            terms.append(f[begin:end])
+    return terms
+
+
+    #polarity = -1 is negated
+    #print(d)
+    #print(s)
+
 def update_mmdict():
     tf2 = filedialog.askopenfilename(
         initialdir="C:/Users/MainFrame/Desktop/",
@@ -95,12 +120,14 @@ def update_mmdict():
 
 def update_ctakesdict():
     pass
-    # tf = filedialog.askopenfilename(
-    #     initialdir="C:/Users/MainFrame/Desktop/",
-    #     title="Open CTakes Output file",
-    #     filetypes=(("Text Files", "*.xmi"),)
-    # )
-    # pathh.insert(END, tf)
+    tf = filedialog.askopenfilename(
+        initialdir="C:/Users/MainFrame/Desktop/",
+        title="Open CTakes Output file",
+        filetypes=(("Text Files", "*.xmi"),)
+    )
+    pathh.insert(END, tf)
+    ctakes_words = set(read_ctakes(tf))
+    print(ctakes_words)
     # tf = open(tf)
     # file_cont = tf.read()
     # txtarea.insert(END, file_cont)
