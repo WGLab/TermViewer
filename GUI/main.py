@@ -2,8 +2,11 @@ import tkinter
 from tkinter import *
 from tkinter import filedialog
 import json
+import glob
 import xml.etree.ElementTree as et
 
+mm_dict = {}
+ctakes_dict = {}
 mm_words = set() #{"impaction", "diabetes", "Down Syndrome"}
 ctakes_words = set() #{"vascular", "cornea", "Down Syndrome"}
 shared_words = set()
@@ -14,23 +17,66 @@ ss_count = 0
 dd_count = 0
 
 txt_fp = "C:/Users/nixona2/Documents/test_notes/10147920.txt"
+txt_files = []
 mm_fp = ""
 ctakes_fp = ""
+currentFile = 0
+
+notation_dict = {}
+
+def nextFile():
+    global currentFile, mm_words, ctakes_words
+    currentFile += 1
+    if currentFile < len(txt_files):
+        new_fp = txt_fp + '/' + txt_files[currentFile]
+        new_mm_fp = mm_fp + '/' + txt_files[currentFile][:-4] + '.json'
+        new_ctakes_fp = ctakes_fp + '/' + txt_files[currentFile][:-4] + '.xmi'
+        print(new_fp)
+        print(new_mm_fp)
+        print(new_ctakes_fp)
+        tf = open(new_fp)
+        file_cont = tf.read()
+        txtarea.insert(END, file_cont)
+        tf.close()
+        mm_words = set(read_json(new_mm_fp))
+        ctakes_words = set(read_ctakes(new_ctakes_fp, new_fp))
+        update_display()
+
+def prevFile():
+    global currentFile, mm_words, ctakes_words
+    currentFile -= 1
+    if currentFile >= 0:
+        new_fp = txt_fp + '/' + txt_files[currentFile]
+        new_mm_fp = mm_fp + '/' + txt_files[currentFile][:-4] + '.json'
+        new_ctakes_fp = ctakes_fp + '/' + txt_files[currentFile][:-4] + '.xmi'
+        print(new_fp)
+        print(new_mm_fp)
+        print(new_ctakes_fp)
+        tf = open(new_fp)
+        file_cont = tf.read()
+        txtarea.insert(END, file_cont)
+        tf.close()
+        mm_words = set(read_json(new_mm_fp))
+        ctakes_words = set(read_ctakes(new_ctakes_fp, new_fp))
+        update_display()
 
 # functions
 def openFile():
-    txt_fp = filedialog.askopenfilename(
+    global txt_fp, txt_files
+    txt = filedialog.askopenfilename(
         initialdir="C:/Users/MainFrame/Desktop/",
         title="Open Text file",
         filetypes=(("Text Files", "*.txt"),)
     )
-    pathh.insert(END, txt_fp)
-    tf = open(txt_fp)
+    pathh.insert(END, txt)
+    tf = open(txt)
     file_cont = tf.read()
     txtarea.insert(END, file_cont)
     tf.close()
-    print(ctakes_words)
-    print(mm_words)
+    txt_fp = '/'.join(txt.split('/')[:-1])
+    txt_files = [x.split('\\')[-1] for x in glob.glob(txt_fp + '/*.txt')]
+    print("Text filepath: " + txt_fp)
+    print("List of files", txt_files)
     update_display()
 
 
@@ -62,8 +108,10 @@ def update_display():
     for word in ctakes_words.difference(mm_words):
         highlight_word(word, "ctakes")
 
-def read_json(file):
-    note = json.loads(file)
+def read_json(fp):
+    file = open(fp)
+    file_cont = file.read()
+    note = json.loads(file_cont)
     terms = []
 
     for doc in note["AllDocuments"]:
@@ -76,43 +124,45 @@ def read_json(file):
                                 terms.append(" ".join(mc["MatchedWords"]))
     return terms
 
-def read_ctakes(f):
+def read_ctakes(f, txt_f):
+    global ctakes_dict
     tree = et.parse(f)
     d = tree.findall('.//{http:///org/apache/ctakes/typesystem/type/textsem.ecore}DiseaseDisorderMention')
     s = tree.findall('.//{http:///org/apache/ctakes/typesystem/type/textsem.ecore}SignSymptomMention')
     all_terms = d + s
-    f = open(txt_fp, "r")
+    f = open(txt_f, "r")
     f = f.read()
     terms = []
     for p in all_terms:
         if p.attrib['polarity'] != -1:
             begin = int(p.attrib['begin'])
             end = int(p.attrib['end'])
+            #ctakes_dict[(begin, end)] = {"umls_id": "not found"}
             terms.append(f[begin:end].lower())
     return terms
 
 def update_mmdict():
     global mm_fp
     global mm_words
-    mm_fp = filedialog.askopenfilename(
+    mm = filedialog.askopenfilename(
         initialdir="C:/Users/MainFrame/Desktop/",
         title="Open Meta Map Output file",
         filetypes=(("Text Files", "*.json"),)
     )
-    file = open(mm_fp)
-    file_cont = file.read()
-    mm_words = set(read_json(file_cont))
+    mm_fp = '/'.join(mm.split('/')[:-1])
+    mm_words = set(read_json(mm))
     update_display()
 
 def update_ctakesdict():
     global ctakes_fp
     global ctakes_words
-    ctakes_fp = filedialog.askopenfilename(
+    ctakes = filedialog.askopenfilename(
         initialdir="C:/Users/MainFrame/Desktop/",
         title="Open CTakes Output file",
         filetypes=(("Text Files", "*.xmi"),)
     )
-    ctakes_words = set(read_ctakes(ctakes_fp))
+    ctakes_fp = '/'.join(ctakes.split('/')[:-1])
+    ctakes_words = set(read_ctakes(ctakes, txt_fp + '/' + ctakes.split('/')[-1][:-4] + '.txt'))
     update_display()
 
 def saveFile():
@@ -146,6 +196,18 @@ ver_sb.pack(side=RIGHT, fill=BOTH)
 
 hor_sb = Scrollbar(frame, orient=HORIZONTAL)
 hor_sb.pack(side=BOTTOM, fill=BOTH)
+
+Button(
+    ws,
+    text="Previous",
+    command=prevFile
+).pack(side=LEFT, expand=True, fill=X, padx=20)
+
+Button(
+    ws,
+    text="Next",
+    command=nextFile
+).pack(side=LEFT, expand=True, fill=X, padx=20)
 
 # adding writing space
 txtarea = Text(frame, width=80, height=30)
@@ -183,6 +245,7 @@ Button(
     text="Load CTakes",
     command=update_ctakesdict
 ).pack(side=LEFT, expand=True, fill=X, padx=20)
+
 
 Button(
     ws,
