@@ -7,8 +7,8 @@ import xml.etree.ElementTree as et
 
 mm_dict = {}
 ctakes_dict = {}
-mm_words = set() #{"impaction", "diabetes", "Down Syndrome"}
-ctakes_words = set() #{"vascular", "cornea", "Down Syndrome"}
+mm_words = set()  # {"impaction", "diabetes", "Down Syndrome"}
+ctakes_words = set()  # {"vascular", "cornea", "Down Syndrome"}
 shared_words = set()
 total_mmcount = 0
 total_ctakescount = 0
@@ -24,8 +24,11 @@ currentFile = 0
 
 notation_dict = {}
 
+
 def nextFile():
     global currentFile, mm_words, ctakes_words
+    notation_dict[txt_files[currentFile]] = annotation.get()
+    print(notation_dict)
     currentFile += 1
     if currentFile < len(txt_files):
         new_fp = txt_fp + '/' + txt_files[currentFile]
@@ -36,11 +39,15 @@ def nextFile():
         print(new_ctakes_fp)
         tf = open(new_fp)
         file_cont = tf.read()
+        txtarea.delete(1.0, END)
+        pathh.delete(0, END)
         txtarea.insert(END, file_cont)
+        pathh.insert(END, new_fp)
         tf.close()
         mm_words = set(read_json(new_mm_fp))
         ctakes_words = set(read_ctakes(new_ctakes_fp, new_fp))
         update_display()
+
 
 def prevFile():
     global currentFile, mm_words, ctakes_words
@@ -54,11 +61,15 @@ def prevFile():
         print(new_ctakes_fp)
         tf = open(new_fp)
         file_cont = tf.read()
+        txtarea.delete(1.0, END)
+        pathh.delete(0, END)
         txtarea.insert(END, file_cont)
+        pathh.insert(END, new_fp)
         tf.close()
         mm_words = set(read_json(new_mm_fp))
         ctakes_words = set(read_ctakes(new_ctakes_fp, new_fp))
         update_display()
+
 
 # functions
 def openFile():
@@ -81,8 +92,7 @@ def openFile():
 
 
 def highlight_word(word, tag, start="1.0", end="end",
-                      regexp=False):
-
+                   regexp=False):
     start = txtarea.index(start)
     end = txtarea.index(end)
     txtarea.mark_set("matchStart", start)
@@ -92,7 +102,7 @@ def highlight_word(word, tag, start="1.0", end="end",
     count = tkinter.IntVar()
     while True:
         index = txtarea.search(word, "matchEnd", "searchLimit",
-                            count=count, regexp=regexp, nocase=True)
+                               count=count, regexp=regexp, nocase=True)
         if index == "": break
         if count.get() == 0: break
         txtarea.mark_set("matchStart", index)
@@ -107,6 +117,7 @@ def update_display():
         highlight_word(word, "mm")
     for word in ctakes_words.difference(mm_words):
         highlight_word(word, "ctakes")
+
 
 def read_json(fp):
     file = open(fp)
@@ -124,6 +135,7 @@ def read_json(fp):
                                 terms.append(" ".join(mc["MatchedWords"]))
     return terms
 
+
 def read_ctakes(f, txt_f):
     global ctakes_dict
     tree = et.parse(f)
@@ -137,9 +149,10 @@ def read_ctakes(f, txt_f):
         if p.attrib['polarity'] != -1:
             begin = int(p.attrib['begin'])
             end = int(p.attrib['end'])
-            #ctakes_dict[(begin, end)] = {"umls_id": "not found"}
+            # ctakes_dict[(begin, end)] = {"umls_id": "not found"}
             terms.append(f[begin:end].lower())
     return terms
+
 
 def update_mmdict():
     global mm_fp
@@ -153,6 +166,7 @@ def update_mmdict():
     mm_words = set(read_json(mm))
     update_display()
 
+
 def update_ctakesdict():
     global ctakes_fp
     global ctakes_words
@@ -165,20 +179,16 @@ def update_ctakesdict():
     ctakes_words = set(read_ctakes(ctakes, txt_fp + '/' + ctakes.split('/')[-1][:-4] + '.txt'))
     update_display()
 
+
 def saveFile():
-    tf = filedialog.asksaveasfile(
-        mode='w',
-
+    tf = filedialog.asksaveasfilename(
+        #mode='w',
         title="Save file",
-        defaultextension=".txt"
+        defaultextension=".json"
     )
-    tf.config(mode='w')
-
-    pathh.insert(END, tf)
-    data = str(txtarea.get(1.0, END))
-    tf.write(data)
-
-    tf.close()
+    with open(tf, "w") as outfile:
+        json.dump(notation_dict, outfile)
+    ws.destroy()
 
 
 ws = Tk()
@@ -196,6 +206,20 @@ ver_sb.pack(side=RIGHT, fill=BOTH)
 
 hor_sb = Scrollbar(frame, orient=HORIZONTAL)
 hor_sb.pack(side=BOTTOM, fill=BOTH)
+
+# Add annotation
+values = {"Bad": "0",
+          "Good": "1"}
+annotation = IntVar(ws)
+#annotation.set(OPTIONS[0])
+
+for (text, value) in values.items():
+    Radiobutton(frame, text=text, variable=annotation,
+                value=value, indicator=0,
+                background="grey").pack(ipadx = 20, ipady=5, side=RIGHT)
+
+#w = OptionMenu(frame, annotation, *OPTIONS)
+#w.pack()
 
 Button(
     ws,
@@ -246,11 +270,10 @@ Button(
     command=update_ctakesdict
 ).pack(side=LEFT, expand=True, fill=X, padx=20)
 
-
 Button(
     ws,
     text="Exit",
-    command=lambda: ws.destroy()
+    command=lambda: saveFile()
 ).pack(side=LEFT, expand=True, fill=X, padx=20, pady=20)
 
 ws.mainloop()
