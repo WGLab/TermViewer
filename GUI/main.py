@@ -5,26 +5,36 @@ import json
 import glob
 import xml.etree.ElementTree as et
 
+#Dictionaries to be used for storing words as (start_location, stop_location) : {CUID, matching_term}
 mm_dict = {}
 ctakes_dict = {}
+
+#Sets to store matching words and find which terms agree between ctakes and metamap
 mm_words = set()  # {"impaction", "diabetes", "Down Syndrome"}
 ctakes_words = set()  # {"vascular", "cornea", "Down Syndrome"}
 shared_words = set()
+
+#Some summary count statistics (not implemented yet but could be useful for analysis)
 total_mmcount = 0
 total_ctakescount = 0
 total_count = 0
-ss_count = 0
-dd_count = 0
+ss_count = 0 #Signs and Symptoms
+dd_count = 0 #Diseases and Disorders
 
+#Stores file path for each directory and the file names of the notes (extensions are replaced to get mm/ctakes files)
 txt_fp = "C:/Users/nixona2/Documents/test_notes/10147920.txt"
 txt_files = []
 mm_fp = ""
 ctakes_fp = ""
+
+#Index in txt_files of current file being displayed
 currentFile = 0
 
+#Stores notations (Good/Bad) for each note to be written out on close
 notation_dict = {}
 
-
+#Loads next text file, corresponding MM and Ctakes files and updates displays
+#Saves any annotation for the prior file before switching
 def nextFile():
     global currentFile, mm_words, ctakes_words
     notation_dict[txt_files[currentFile]] = annotation.get()
@@ -48,7 +58,8 @@ def nextFile():
         ctakes_words = set(read_ctakes(new_ctakes_fp, new_fp))
         update_display()
 
-
+#Loads previous text file in txt_files list, corresponding MM and Ctakes files and updates displays
+#Saves any annotation for the prior file before switching
 def prevFile():
     global currentFile, mm_words, ctakes_words
     currentFile -= 1
@@ -71,7 +82,9 @@ def prevFile():
         update_display()
 
 
-# functions
+# Opens text file and stores the parent directory path as the txt_fp
+# Loads all filenames in path into txt_files list
+
 def openFile():
     global txt_fp, txt_files
     txt = filedialog.askopenfilename(
@@ -90,7 +103,7 @@ def openFile():
     print("List of files", txt_files)
     update_display()
 
-
+#Helper function to highlight words a specified tag color
 def highlight_word(word, tag, start="1.0", end="end",
                    regexp=False):
     start = txtarea.index(start)
@@ -109,7 +122,7 @@ def highlight_word(word, tag, start="1.0", end="end",
         txtarea.mark_set("matchEnd", "%s+%sc" % (index, count.get()))
         txtarea.tag_add(tag, "matchStart", "matchEnd")
 
-
+#Helper function to calculate where mm and ctakes agree/disagree and highlight each word in those sets accordingly
 def update_display():
     for word in mm_words.intersection(ctakes_words):
         highlight_word(word, "both")
@@ -118,6 +131,8 @@ def update_display():
     for word in ctakes_words.difference(mm_words):
         highlight_word(word, "ctakes")
 
+# Opens a json file from MM and parses it to extract words
+#TODO: Change to store start/end indices and CUID rather than words themselves
 
 def read_json(fp):
     file = open(fp)
@@ -125,6 +140,7 @@ def read_json(fp):
     note = json.loads(file_cont)
     terms = []
 
+    #Navigate json structure
     for doc in note["AllDocuments"]:
         for utterance in doc["Document"]["Utterances"]:
             for phrase in utterance["Phrases"]:
@@ -132,13 +148,17 @@ def read_json(fp):
                     for mapping in phrase["Mappings"]:
                         for mc in mapping["MappingCandidates"]:
                             if mc["Negated"] != 1:
+                                #Add matched words to return
                                 terms.append(" ".join(mc["MatchedWords"]))
     return terms
 
+# Opens a xmi file from ctakes and parses it to extract words
+#TODO: Change to store start/end indices and CUID rather than words themselves
 
 def read_ctakes(f, txt_f):
     global ctakes_dict
     tree = et.parse(f)
+    #Find all relevant entries
     d = tree.findall('.//{http:///org/apache/ctakes/typesystem/type/textsem.ecore}DiseaseDisorderMention')
     s = tree.findall('.//{http:///org/apache/ctakes/typesystem/type/textsem.ecore}SignSymptomMention')
     all_terms = d + s
@@ -147,13 +167,15 @@ def read_ctakes(f, txt_f):
     terms = []
     for p in all_terms:
         if p.attrib['polarity'] != -1:
+            #Find indices
             begin = int(p.attrib['begin'])
             end = int(p.attrib['end'])
             # ctakes_dict[(begin, end)] = {"umls_id": "not found"}
+            #Extract word and add to return
             terms.append(f[begin:end].lower())
     return terms
 
-
+# Opens json file and stores the parent directory path as the mm_fp
 def update_mmdict():
     global mm_fp
     global mm_words
@@ -166,7 +188,7 @@ def update_mmdict():
     mm_words = set(read_json(mm))
     update_display()
 
-
+# Opens xmi file and stores the parent directory path as the ctakes_fp to read all future xmi files from
 def update_ctakesdict():
     global ctakes_fp
     global ctakes_words
@@ -179,7 +201,7 @@ def update_ctakesdict():
     ctakes_words = set(read_ctakes(ctakes, txt_fp + '/' + ctakes.split('/')[-1][:-4] + '.txt'))
     update_display()
 
-
+#Saves note annotations (Good/Bad) as a json file before killing the program
 def saveFile():
     tf = filedialog.asksaveasfilename(
         #mode='w',
@@ -190,7 +212,7 @@ def saveFile():
         json.dump(notation_dict, outfile)
     ws.destroy()
 
-
+#Creates GUI 
 ws = Tk()
 ws.title("Term Viewer")
 ws.geometry("800x600")
