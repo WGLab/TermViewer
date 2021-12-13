@@ -212,7 +212,7 @@ def saveFile():
         json.dump(notation_dict, outfile)
     ws.destroy()
 
-#Creates GUI 
+#Creates GUI
 ws = Tk()
 ws.title("Term Viewer")
 ws.geometry("800x600")
