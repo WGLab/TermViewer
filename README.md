@@ -13,21 +13,21 @@ Before you begin it is important that all notes are stored in one directory as t
 
 When the program begins you should see the following screen:
 
-![Main Page](GUI/docs/images/main.png)
+![Main Page](https://github.com/WGLab/nlp_notes/blob/main/GUI/docs/images/main.PNG)
 
 The Good/Bad buttons on the right hand side let you annotate each loaded file as either a good note or a bad note, these annotations are stored locally every time you hit Previous/Next and saved when you hit Exit
  
 To view documents first click 'Open File' and navigate to one text file in the directory containing ALL the notes that you want to go through.
 
-![File Explorer](GUI/docs/images/fileexplorer.png)
+![File Explorer](https://github.com/WGLab/nlp_notes/blob/main/GUI/docs/images/fileexplorer.png)
 
 Then click 'Load MetaMap' and navigate to one json file in the directory containing ALL the MetaMap outputs generated from your notes. Make sure that the name before the .json extension of your MetaMap output files matches exactly with the names of the .txt files containing the note content. 
 
-![MetaMap](GUI/docs/images/mm.png)
+![MetaMap](https://github.com/WGLab/nlp_notes/blob/main/GUI/docs/images/mm.png)
 
 Click 'Load cTakes' and navigate to one xmi file in the directory containing ALL the cTakes outputs generated from your notes. Make sure that the name before the .xmi extension of your cTakes output files matches exactly with the names of the .txt files containing the note content. 
 
-![cTakes](GUI/docs/images/ctakes.png) 
+![cTakes](https://github.com/WGLab/nlp_notes/blob/main/GUI/docs/images/ctakes.png) 
 
 Once all the files are loaded you should see an output like the one below. 
 
@@ -35,4 +35,4 @@ ORANGE - indicates a term was identified by MetaMap
 YELLOW - indicates a term was identified by cTakes
 GREEN - indicates a term was identified by both MetaMap and cTakes 
 
-![Loaded Main Page](GUI/docs/images/loaded.png) 
+![Loaded Main Page](https://github.com/WGLab/nlp_notes/blob/main/GUI/docs/images/loaded.png) 
