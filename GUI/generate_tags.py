@@ -1,8 +1,9 @@
 import json
 import glob
 import xml.etree.ElementTree as et
+import sys
 
-# TODO: Make this editable in a config file for readability
+# TODO: Make this editable in a config file for readability?
 # Stores file path for each directory and the file names of the notes (extensions are replaced to get mm/ctakes files)
 txt_fp = "C:/Users/nixona2/Documents/test_notes/notes_pre/"
 mm_fp = "C:/Users/nixona2/Documents/test_notes/mm_pre/"
@@ -162,6 +163,13 @@ def createJSON(txt_fp, mm_fp, ctakes_fp, out_fp, doc_name):
     with open(out_fp + doc_name + ".json", 'w') as f:
         json.dump(output, f)
 
+#Check for commandline arguments
+if len(sys.argv) == 5:
+    umls_fp = sys.argv[0]
+    txt_fp = sys.argv[1]
+    ctakes_fp = sys.argv[2]
+    mm_fp = sys.argv[3]
+    storage_fp = sys.argv[4]
 
 # Load files and create jsons
 readUMLSDict(umls_fp)
