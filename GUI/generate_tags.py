@@ -163,20 +163,24 @@ def createJSON(txt_fp, mm_fp, ctakes_fp, out_fp, doc_name):
     with open(out_fp + doc_name + ".json", 'w') as f:
         json.dump(output, f)
 
+print(sys.argv)
 #Check for commandline arguments
-if len(sys.argv) == 5:
-    umls_fp = sys.argv[0]
-    txt_fp = sys.argv[1]
-    ctakes_fp = sys.argv[2]
-    mm_fp = sys.argv[3]
-    storage_fp = sys.argv[4]
+if len(sys.argv) == 6:
+    print("LOADING ARGS")	
+    umls_fp = sys.argv[1]
+    txt_fp = sys.argv[2]
+    ctakes_fp = sys.argv[3]
+    mm_fp = sys.argv[4]
+    storage_fp = sys.argv[5]
 
+print("RUNNING COMMAND")
 # Load files and create jsons
 readUMLSDict(umls_fp)
 # Run on multiple or single file
 if single_file:
     createJSON(txt_fp, mm_fp, ctakes_fp, storage_fp, test_filename)
 else:
-    files = [x.split('\\')[-1][:-4] for x in glob.glob(txt_fp + '/*.txt')]
+    files = [x.split('/')[-1][:-4] for x in glob.glob(txt_fp + '/*.txt')]
     for file in files:
+        print(file)
         createJSON(txt_fp, mm_fp, ctakes_fp, storage_fp, file)
