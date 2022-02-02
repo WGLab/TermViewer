@@ -12,7 +12,7 @@ Modify the file paths to the appropriate locations on your machine
 
 NOTE: All file paths must be pointing to existing directories so make sure to create empty output folders if they do not already exist 
 
-![Specify Filepaths](https://github.com/WGLab/nlp_notes/blob/main/GUI/docs/images/filepaths.PNG)
+![Specify Filepaths](https://github.com/WGLab/nlp_notes/blob/main/docs/images/filepaths.PNG)
 
 From the scripts folder run
 ```
@@ -27,12 +27,12 @@ It should open the following screen on your default browser
 
 Click 'Choose File' and navigate to the output folder you specified earlier to load a JSON file containing a tagged note 
 
-![Main Page](https://github.com/WGLab/nlp_notes/blob/main/GUI/docs/images/main.PNG)
+![Main Page](https://github.com/WGLab/nlp_notes/blob/main/docs/images/main.PNG)
 
 Select which labels you would like to view and click 'Confirm Selection'
 
-![Select Labels](https://github.com/WGLab/nlp_notes/blob/main/GUI/docs/images/labels.PNG)
+![Select Labels](https://github.com/WGLab/nlp_notes/blob/main/docs/images/labels.PNG)
 
 Any HPO terms that were detected by MetaMap, cTakes, or both will now be overlaid onto the original note for easy analysis
 
-![HPO Terms](https://github.com/WGLab/nlp_notes/blob/main/GUI/docs/images/hpo.PNG)
+![HPO Terms](https://github.com/WGLab/nlp_notes/blob/main/docs/images/hpo.PNG)
