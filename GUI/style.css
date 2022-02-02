@@ -1,0 +1,176 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+h2 {text-align: center;}
+
+.heading {
+    margin: auto;
+    padding-left:25px;
+    padding-right:25px;
+    vertical-align: middle;
+    border: 0px solid;
+    background-color: rgb(255, 255, 255);
+}
+
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding-left:25px;
+    padding-right:25px;
+    vertical-align: middle;
+    border: 0px solid;
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(161, 161, 161);
+}
+
+.trashButton{
+    background-color: #4b4b4b;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    margin-left: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top:8px;
+    padding-bottom: 8px;
+	border-radius: 0.5em;
+}
+
+.yesNoUnk {
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top:0px;
+    padding-bottom: 0px;
+	display: inline-block;
+	border-radius: 0.5em;
+}
+
+.yesLabel {
+    background-color: #bd0101;
+}
+
+.noLabel {
+    background-color: #1d1d1d;
+}
+
+.unkLabel {
+    background-color: #757575;
+}
+
+
+.largeButton {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 5px;
+    cursor: pointer;
+    line-height: 150%;
+    width: 200px;
+}
+
+.regularButton {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 2px 2px;
+    text-align: center;
+    font-size: 18px;
+    margin: 2px;
+    border-radius: 0.25em;
+}
+
+.largeCheckbox {
+    width: 15px;
+    height: 15px;
+}
+
+.checkboxLabel {
+    font-size: 18px;
+    cursor: pointer;
+    line-height: 150%;
+}
+
+.mainbox {
+    border: 1px solid gray;
+    padding: 10px 10px;
+    line-height: 200%;
+}
+
+.right{
+    float: right;
+}
+
+.left{
+    float:left;
+}
+
+.namedEntity{
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+	display: inline-block;
+	border-radius: 0.25em;
+	border: 1px solid;
+}
+
+.namedEntityButton{
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+	display: inline-block;
+    font-size: 20px;
+    border-radius: 0.25em;
+    line-height: 125%;
+}
+
+.color0 {
+    background-color: #ffcdff;
+    border-color: #ff99ff;
+}
+
+.color1 {
+    background-color: rgba(255, 94, 0, 0.2);
+    border-color: rgb(255, 94, 0);
+}
+
+.color2 {
+    background-color: rgba(135, 202, 0, 0.2);
+    border-color: rgb(135, 202, 0);
+}
+
+.color3 {
+    background-color: #a5e5f5;
+    border-color: #00ccff;
+}
+
+.color4 {
+    background-color: #ccccf8;
+    border-color: #9999ff;
+}
+
+.color5 {
+    background-color: #d3d3d3;
+    border-color: #888888;
+}
+
+.color6 {
+    background-color: #fff89c;
+    border-color: #ddc453;
+}
+
+.docInfoSpan{
+    color: #0f9914;
+}
+

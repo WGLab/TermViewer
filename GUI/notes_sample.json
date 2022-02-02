@@ -1,0 +1,53 @@
+[
+    {
+        "py/object": "document.Document",
+        "data_struct_version": 1.0,
+        "source_file": "BioCXML/9464.bioc.xml",
+        "doc_id": "4029977",
+        "pmid": "24851142",
+        "pmcid": "4029977",
+        "publisher_item_identifier": "*",
+        "doi": "10.1186/1897-4287-12-14",
+        "license": "This is an Open Access article distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by/2.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly credited. The Creative Commons Public Domain Dedication waiver (http://creativecommons.org/publicdomain/zero/1.0/) applies to the data made available in this article, unless otherwise stated.",
+        "title": "Familial cancer among consecutive uterine cancer patients in Sweden",
+        "abstract": "We showed a familial clustering of UC among relatives of our index patients. Of the seven families with mutation-verified Lynch Syndrome, only one had been previously diagnosed, highlighting the need to increase gynecologists' awareness of the importance of taking family history. Our data on multiple cancers and young age of onset in families with uterine cancer is compatible with the existence of additional hereditary uterine cancer syndromes.",
+        "keyword": "Familial cancer Uterine cancer Lynch Syndrome Multiple tumors",
+        "authors": "Tzortzatos G, Wersäll O, Danielsson KG, Lindblom A, Tham E, Mints M",
+        "subtitle": "*",
+        "journal": "Hered Cancer Clin Pract; 2014; 12(1) 14. doi:10.1186/1897-4287-12-14",
+        "year": "2014",
+        "entrez_pub_date": "*",
+        "passage_list": [
+            {
+                "py/object": "document.Passage",
+                "section_type": "RESULTS",
+                "passage_type": "paragraph",
+                "offset": "0",
+                "passage_text": "DOE: 8/15/2007\n\nAnne Gloria Shoffler is a(n) 10 year old female who was seen in Pediatric Otolaryngology at The Children's Hospital of Philadelphia for otologic evaluation. Pt with hx of cerumen impation. Pt with Trisomy 21. Pt doing well with no ear complaints.\n\nThe history was obtained from the mother.\n\n$&Patient / Family Education Given: Yes\nBarriers to Learning: None Identified\nS.C.A.N.:  No$!\n\n HPI ENT:  \nEar  - wax impaction \nNose / Sinus  - Negative \nThroat / Mouth  - Negative \nNeck  - Negative \nAirway  - Negative \n$&\n  PATIENT / FAMILY HISTORY \nImmunizations  up to date \nPrenatal Issues  Full Term, no complications \nHospitalizations  None \nPrior Surgeries  Yes, See Surgical History section in Epic \nMedications & \nHerbal Supplements  None \nFamily Hx Anesthesia Problems  None \nFamily Hx Bleeding Problems  None \n\n   REVIEW OF SYSTEMS \nENT  See ENT HPI \nConstitutional  Negative for fever, weight loss or recent illness \nCardiovascular      Negative \nRespiratory  Negative \nNeurological   Not reviewed \nGastrointestinal   Not reviewed \nGenitourinary    Not reviewed \nHematology/ Oncology  Not reviewed \nEndocrine/ Genetics/  \nMetabolic  Genetic syndrome: Down Syndrome \nAllergy/Immunology   Not reviewed \nMusculoskeletal   Not reviewed \nDevelopmental/ Behavioral  Not reviewed \nEyes  Not reviewed \n$!\n   EXAMINATION \nConstitutional General Appearance: Well-appearing, alert, in no distress\nAbility to Communicate Age-appropriate\nPain: None at this time \nHead & Face Inspection:  Normocephalic \nEyes Ocular Motility: Extraocular movements intact \n\nEars Right EXT: Normal\nRight EAC: Cerumen in canal, removed \nRight TM: TM normal, middle ear clear Left EXT: Normal\nLeft EAC: Cerumen in canal, removed \nLeft TM:  TM normal, middle ear clear \n \nNose Ext Nose: Dorsum midline\nNasal Mucosa, Septum, Turbinates: Patent, normal mucosa, septum midline \nOral Cavity, Mouth \nPharynx Lips/Teeth/Gums: No lesions, dentition age appropriate\nOral Mucosa: Moist, pink\nTongue/Floor of Mouth: Tongue: intact, full range of motion; Floor of mouth: no lesions\nPalate/Uvula: Intact, mobile\nTonsils: Surgically absent\nPosterior Pharynx: Normal\nPharyngeal Walls: Intact, mobile \nCervical Neck: No palpable masses\nThyroid: No palpable masses \nLymphatic Neck Nodes: No palpable nodes \n$&\nRespiratory Auscultation: Not examined\nChest Movement: Not examined \nCardiac Murmurs: Not examined\nAuscultation: Not examined \nNeuro/Psych Cranial Nerves: Not examined\nOrientation: Not assessed\nMood & Affect: Not assessed \nGI/GU Not examined   \\\\nSkin Not examined \\nMusculoskeletal Not examined \nExtremities Not examined \n$!\nRadiology films personally reviewed: Not applicable\nOutside medical records reviewed: Not applicable\nAudiogram: Not performed\n\nASSESSMENT\nDiagnoses \nCode Name Primary? \n 380.4 IMPACTED CERUMEN Yes \n\nPLAN\nContinue outpatient management; see follow-up recommendations below\nFOLLOW-UP\nReturn in about 2 months (around 10/15/2007) for follow up.\n\nBetsey Kim, CRNP, CORLN\nRalph F. Wetmore, MD\n\n\n\n\n",
+                "named_entity_list": [
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "MetaMap",
+                        "text": "general",
+                        "identifier": "4292",
+                        "offset": "15",
+                        "length": "7",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "cTakes",
+                        "text": "alert",
+                        "identifier": "4436",
+                        "offset": "51",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    }
+                ]
+            }
+        ],
+        "mesh_list": []
+    }
+]

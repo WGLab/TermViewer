@@ -1,14 +1,22 @@
 #!/bin/bash
 
 #define filepaths
+# Location of umls term dictionary (MRCONSO.RRF)
 UMLS_DICT=/home/nixona2/nixona2/MRCONSO.RRF
+# Location of input notes (.TXT format)
 NOTES=/home/nixona2/nixona2/Z123115/
+# Output location for preprocessed notes
 PREPROCESSED_NOTES=/home/nixona2/scripted_preprocess/
+# Output location for MetaMap
 METAMAP_OUT=/home/nixona2/scripted_mm/
+# Output location for cTakes
 CTAKES_OUT=/home/nixona2/scripted_ctakes/
+# Output location for final tagged notes (.JSON format)
 TAGGED_NOTES=/home/nixona2/scripted_final/
 
+# Home directory of MetaMap installation
 METAMAP_DIR=/home/nixona2/public_mm/
+# Home directory of cTakes installation
 CTAKES_DIR=/home/nixona2/Documents/apache-ctakes-4.0.0.1/
 CURR_DIR=$(pwd -P)
 

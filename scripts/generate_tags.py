@@ -5,19 +5,23 @@ import sys
 
 # TODO: Make this editable in a config file for readability?
 # Stores file path for each directory and the file names of the notes (extensions are replaced to get mm/ctakes files)
+# Location of notes
 txt_fp = "C:/Users/nixona2/Documents/test_notes/notes_pre/"
+# Location of MetaMap output files (JSON format)
 mm_fp = "C:/Users/nixona2/Documents/test_notes/mm_pre/"
+# Location of cTakes files (XMI format)
 ctakes_fp = "C:/Users/nixona2/Documents/test_notes/ctakes_pre/"
+# Location of tagged note output (JSON format)
 storage_fp = "C:/Users/nixona2/Documents/test_notes/out_pre/"
+# Location of umls term dictionary (MRCONSO.RRF)
 umls_fp = "C:/Users/nixona2/Documents/MRCONSO.RRF"
-
-# Dictionary for UMLS terms
-umls_conv = {}
 
 # Set to true to test on a single file
 single_file = False
 test_filename = "10147920"
 
+# Dictionary for UMLS terms
+umls_conv = {}
 
 # Reads MRCONSO.RRF containing UMLS terms into dictionary
 def readUMLSDict(fp):

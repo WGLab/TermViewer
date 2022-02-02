@@ -1,0 +1,1330 @@
+[
+    {
+        "py/object": "document.Document",
+        "data_struct_version": 1.0,
+        "source_file": "BioCXML/9464.bioc.xml",
+        "doc_id": "4029977",
+        "pmid": "24851142",
+        "pmcid": "4029977",
+        "publisher_item_identifier": "*",
+        "doi": "10.1186/1897-4287-12-14",
+        "license": "This is an Open Access article distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by/2.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly credited. The Creative Commons Public Domain Dedication waiver (http://creativecommons.org/publicdomain/zero/1.0/) applies to the data made available in this article, unless otherwise stated.",
+        "title": "Familial cancer among consecutive uterine cancer patients in Sweden",
+        "abstract": "We showed a familial clustering of UC among relatives of our index patients. Of the seven families with mutation-verified Lynch Syndrome, only one had been previously diagnosed, highlighting the need to increase gynecologists' awareness of the importance of taking family history. Our data on multiple cancers and young age of onset in families with uterine cancer is compatible with the existence of additional hereditary uterine cancer syndromes.",
+        "keyword": "Familial cancer Uterine cancer Lynch Syndrome Multiple tumors",
+        "authors": "Tzortzatos G, Wersäll O, Danielsson KG, Lindblom A, Tham E, Mints M",
+        "subtitle": "*",
+        "journal": "Hered Cancer Clin Pract; 2014; 12(1) 14. doi:10.1186/1897-4287-12-14",
+        "year": "2014",
+        "entrez_pub_date": "*",
+        "passage_list": [
+            {
+                "py/object": "document.Passage",
+                "section_type": "RESULTS",
+                "passage_type": "paragraph",
+                "offset": "17997",
+                "passage_text": "Pedigrees were evaluated for possible hereditary cancer syndromes, in order to perform genetic testing and to refer the patient for genetic counseling. Nine index patients (9/481, 2%) fulfilled the Amsterdam II criteria for LS. All nine had endometrioid carcinoma diagnosed at a median age of 58 years (range: 39-80). Seven of the nine had deleterious mutations in mismatch repair genes: three in MLH1 (c.546-2A > G; c.790 + 1G > C and deletion of exon 1-3) and four in MSH2 (c.1147C > T; c.1786_1788del; deletion of exon 7-10 and deletion from exon 3 of the EPCAM gene to exon 6 of MSH2). One kindred was a known LS family, the other six were diagnosed as part of this study. Two of the index patients with LS had no known family history of colorectal cancer (Figure 1). No index patients fulfilled the National Comprehensive Cancer Network guidelines for Cowden syndrome and none were screened for mutations in the PTEN gene.",
+                "named_entity_list": [
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "MLH1",
+                        "identifier": "4292",
+                        "offset": "18394",
+                        "length": "4",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "MSH2",
+                        "identifier": "4436",
+                        "offset": "18467",
+                        "length": "4",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "EPCAM",
+                        "identifier": "4072",
+                        "offset": "18556",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "MSH2",
+                        "identifier": "4436",
+                        "offset": "18580",
+                        "length": "4",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "PTEN",
+                        "identifier": "5728",
+                        "offset": "18914",
+                        "length": "4",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Species",
+                        "text": "patient",
+                        "identifier": "9606",
+                        "offset": "18117",
+                        "length": "7",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Species",
+                        "text": "patients",
+                        "identifier": "9606",
+                        "offset": "18160",
+                        "length": "8",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Species",
+                        "text": "patients",
+                        "identifier": "9606",
+                        "offset": "18691",
+                        "length": "8",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Species",
+                        "text": "patients",
+                        "identifier": "9606",
+                        "offset": "18778",
+                        "length": "8",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Disease",
+                        "text": "endometrioid carcinoma",
+                        "identifier": "MESH:D016889",
+                        "offset": "18238",
+                        "length": "22",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Disease",
+                        "text": "Cancer",
+                        "identifier": "MESH:D009369",
+                        "offset": "18824",
+                        "length": "6",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "c.1786_1788del",
+                        "identifier": "c.1786_1788del",
+                        "offset": "18486",
+                        "length": "14",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Disease",
+                        "text": "hereditary cancer syndromes",
+                        "identifier": "MESH:D009386",
+                        "offset": "18035",
+                        "length": "27",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Disease",
+                        "text": "colorectal cancer",
+                        "identifier": "MESH:D015179",
+                        "offset": "18739",
+                        "length": "17",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "c.790 + 1G > C",
+                        "identifier": "c.790+1G>C;RS#:267607789",
+                        "offset": "18414",
+                        "length": "14",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "c.1147C > T",
+                        "identifier": "c.1147C>T;RS#:63749849",
+                        "offset": "18473",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Disease",
+                        "text": "Cowden syndrome",
+                        "identifier": "MESH:D006223",
+                        "offset": "18854",
+                        "length": "15",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "c.546-2A > G",
+                        "identifier": "c.546-2A>G;RS#:267607759",
+                        "offset": "18400",
+                        "length": "12",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    }
+                ]
+            },
+            {
+                "py/object": "document.Passage",
+                "section_type": "FIG",
+                "passage_type": "fig_caption",
+                "offset": "18949",
+                "passage_text": "Pedigrees of two families that were diagnosed with Lynch syndrome. MSH 2, del exon 7-10 and MSH2, c1147C > T mutations were diagnosed as part of the study. Note that there was no known colorectal cancer in any of the families.",
+                "named_entity_list": [
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "MSH2",
+                        "identifier": "4436",
+                        "offset": "19041",
+                        "length": "4",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Disease",
+                        "text": "colorectal cancer",
+                        "identifier": "MESH:D015179",
+                        "offset": "19134",
+                        "length": "17",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "c1147C > T",
+                        "identifier": "c.1147C>T;RS#:63749849",
+                        "offset": "19047",
+                        "length": "10",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Disease",
+                        "text": "Lynch syndrome",
+                        "identifier": "MESH:D003123",
+                        "offset": "19000",
+                        "length": "14",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    }
+                ]
+            }
+        ],
+        "mesh_list": []
+    },
+    {
+        "py/object": "document.Document",
+        "data_struct_version": 1.0,
+        "source_file": "BioCXML/9464.bioc.xml",
+        "doc_id": "4030297",
+        "pmid": "23770805",
+        "pmcid": "4030297",
+        "publisher_item_identifier": "*",
+        "doi": "10.1177/0194599813493075",
+        "license": "           This file is available for text mining. It may also be used consistent with the principles of fair use under the copyright law.         ",
+        "title": "Genetic Analysis through OtoSeq of Pakistani Families Segregating Prelingual Hearing Loss",
+        "abstract": "Using NGS based platforms like OtoSeq in families segregating hearing loss, will contribute to the identification of common and population specific mutations, early diagnosis, genetic counseling and molecular epidemiology.",
+        "keyword": "Hearing loss Usher syndrome microdroplet PCR next generation sequencing clinical diagnosis genetic etiology            PDS                     MYO7A                     CDH23         ",
+        "authors": "Shahzad M, Sivakumaran TA, Qaiser TA, Schultz JM, Hussain Z, Flanagan M, Bhinder MA, Kissell D, Greinwald JH, Khan SN, Friedman TB, Zhang K, Riazuddin S, Riazuddin S, Ahmed ZM",
+        "subtitle": "*",
+        "journal": "Otolaryngol Head Neck Surg; 2013 Sep; 149(3) 478-87. doi:10.1177/0194599813493075",
+        "year": "2013",
+        "entrez_pub_date": "*",
+        "passage_list": [
+            {
+                "py/object": "document.Passage",
+                "section_type": "RESULTS",
+                "passage_type": "paragraph",
+                "offset": "9535",
+                "passage_text": "We identified 22 homozygous mutant alleles of MYO7A (Table 1) that segregated among 26 families (Figures 1 and 2). Among the 11 novel mutations, seven were missense substitutions of residues evolutionarily conserved in a variety of myosin VIIA orthologs (Figure 4); these are predicted to have deleterious effects on the function of this unconventional myosin (Table 1). In addition, we identified one new nonsense (p.Arg1967*), one frameshift (p.Asp1638Metfs*7) and two splice site (c.2367+1G>A, c.6354+1G>A) mutations. Assuming that these mutant mRNAs escape degradation by the nonsense-mediated decay pathway, these mutations are predicted to result in truncation of the encoded protein.",
+                "named_entity_list": [
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "MYO7A",
+                        "identifier": "4647",
+                        "offset": "9581",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "myosin VIIA",
+                        "identifier": "4647",
+                        "offset": "9767",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "c.6354+1G>A",
+                        "identifier": "c.6354+1G>A",
+                        "offset": "10032",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "c.2367+1G>A",
+                        "identifier": "c.2367+1G>A",
+                        "offset": "10019",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Asp1638Metfs",
+                        "identifier": "p.D1638MfsX",
+                        "offset": "9980",
+                        "length": "14",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Arg1967*",
+                        "identifier": "p.R1967*",
+                        "offset": "9951",
+                        "length": "10",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    }
+                ]
+            },
+            {
+                "py/object": "document.Passage",
+                "section_type": "RESULTS",
+                "passage_type": "paragraph",
+                "offset": "10226",
+                "passage_text": "We also identified eleven reported MYO7A alleles that segregated in 16 families, including four missense (p.Arg241Cys, p.Arg241His, p.Ala826Thr, p.Gly2163Ser), two nonsense (p.Lys420*, p.Trp838*), three frameshift (p.Glu166Argfs*3, p.Tyr1302Thrfs*96, p.Asp1613Valfs*31) and two splice site mutation (c.2695-9A>G, c.3504-1G>C) (Table 1). Surprisingly, two different homozygous, potentially pathogenic mutations of MYO7A (p.Gly434Arg, p.Ala826Thr) were segregating in family PKDF959 (Table 1). The p.Ala826Thr mutation was initially identified in USH1B subjects from Algeria and Morocco. We also previously identified the p.Ala826Thr mutation in a large consanguineous Pakistani family. Parents of these affected individuals were heterozygous for both alleles and had normal hearing, suggesting two possibilities: 1) Both alleles are present in the cis-configuration and parents have one normal copy of MYO7A; 2) Alternatively, p.Gly434Arg may be a rare polymorphism, which is in linkage-disequilibrium with the p.Ala826Thr pathogenic allele in family PKDF959. Currently, we do not have lymphoblast cell-derived cDNA samples available from these families and at genomic DNA level these two alleles are ~16Kb apart, which precludes our attempt to determine the cis/trans configuration of these two alleles. Intriguingly, no potential pathogenic mutation in the protein coding exons or in the splice junctions of MYO7A was detected in six other families with linkage to chromosome 11q13.5 STR markers (data not shown).",
+                "named_entity_list": [
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "MYO7A",
+                        "identifier": "4647",
+                        "offset": "10261",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "MYO7A",
+                        "identifier": "4647",
+                        "offset": "10639",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "USH1B",
+                        "identifier": "4647",
+                        "offset": "10771",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "MYO7A",
+                        "identifier": "4647",
+                        "offset": "11635",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "MYO7A",
+                        "identifier": "4647",
+                        "offset": "11127",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Gly434Arg",
+                        "identifier": "p.G434R;RS#:145544778",
+                        "offset": "10646",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Ala826Thr",
+                        "identifier": "p.A826T;RS#:368341987",
+                        "offset": "10846",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Ala826Thr",
+                        "identifier": "p.A826T;RS#:368341987",
+                        "offset": "10659",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Arg241Cys",
+                        "identifier": "p.R241C;RS#:782166819",
+                        "offset": "10332",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Chemical",
+                        "text": "Asp1613Valfs",
+                        "identifier": "-",
+                        "offset": "10479",
+                        "length": "12",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Gly434Arg",
+                        "identifier": "p.G434R;RS#:145544778",
+                        "offset": "11152",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Ala826Thr",
+                        "identifier": "p.A826T;RS#:368341987",
+                        "offset": "10358",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "c.2695-9A>G",
+                        "identifier": "c.2695-9A>G",
+                        "offset": "10526",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Trp838*",
+                        "identifier": "p.W838*",
+                        "offset": "10411",
+                        "length": "9",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Lys420*",
+                        "identifier": "p.K420*",
+                        "offset": "10400",
+                        "length": "9",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "c.3504-1G>C",
+                        "identifier": "c.3504-1G>C",
+                        "offset": "10539",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Ala826Thr",
+                        "identifier": "p.A826T;RS#:368341987",
+                        "offset": "10722",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Chemical",
+                        "text": "Tyr1302Thrfs",
+                        "identifier": "-",
+                        "offset": "10460",
+                        "length": "12",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Arg241His",
+                        "identifier": "p.R241H;RS#:111033284",
+                        "offset": "10345",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Ala826Thr",
+                        "identifier": "p.A826T;RS#:368341987",
+                        "offset": "11236",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Gly2163Ser",
+                        "identifier": "p.G2163S;RS#:747656448",
+                        "offset": "10371",
+                        "length": "12",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    }
+                ]
+            },
+            {
+                "py/object": "document.Passage",
+                "section_type": "RESULTS",
+                "passage_type": "paragraph",
+                "offset": "11741",
+                "passage_text": "In the USH1D family (PKDF475; Figure 1), we identified a homozygous transition mutation (c.8530C>T) that resulted in a substitution of serine for proline at position 2844 (p.Pro2844Ser) in the 27th ectodomain (Table 1). The p.Pro2844Ser mutation was recently reported to be associated with type 1 Usher syndrome segregating in another Pakistani family. In the PDS family (PKDF609; Figure 1), we identified a homozygous transversion mutation (c.716T>A) in exon 6 of SLC26A4 that results in a substitution of valine by aspartic acid (p.Val239Asp) in the encoded protein, Pendrin (Table 1).",
+                "named_entity_list": [
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "USH1D",
+                        "identifier": "64072",
+                        "offset": "11748",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "SLC26A4",
+                        "identifier": "5172",
+                        "offset": "12206",
+                        "length": "7",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "Pendrin",
+                        "identifier": "5172",
+                        "offset": "12310",
+                        "length": "7",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "PDS",
+                        "identifier": "5172",
+                        "offset": "12101",
+                        "length": "3",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Pro2844Ser",
+                        "identifier": "p.P2844S;RS#:758304963",
+                        "offset": "11913",
+                        "length": "12",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Chemical",
+                        "text": "aspartic acid",
+                        "identifier": "MESH:D001224",
+                        "offset": "12258",
+                        "length": "13",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Chemical",
+                        "text": "valine",
+                        "identifier": "MESH:D014633",
+                        "offset": "12248",
+                        "length": "6",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "c.716T>A",
+                        "identifier": "c.716T>A;RS#:111033256",
+                        "offset": "12183",
+                        "length": "8",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "serine for proline at position 2844",
+                        "identifier": "p.P2844S;RS#:758304963",
+                        "offset": "11876",
+                        "length": "35",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Pro2844Ser",
+                        "identifier": "p.P2844S;RS#:758304963",
+                        "offset": "11965",
+                        "length": "12",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Val239Asp",
+                        "identifier": "p.V239D;RS#:111033256",
+                        "offset": "12273",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "c.8530C>T",
+                        "identifier": "c.8530C>T;RS#:758304963",
+                        "offset": "11830",
+                        "length": "9",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    }
+                ]
+            },
+            {
+                "py/object": "document.Passage",
+                "section_type": "DISCUSS",
+                "passage_type": "paragraph",
+                "offset": "15145",
+                "passage_text": "As of January 2013, 260 different mutant alleles of MYO7A have been reported and are listed in the Human Gene Mutation Database (http://www.hgmd.cf.ac.uk/ac/gene.php?gene=MYO7A). Although some of these are recurrent variants, most are private and distributed across the gene. In our study, only two mutations (c.721C>T and c.1258A>T) of MYO7A were found in multiple families (Table 1). Together with our earlier result, we observed a distinct spectrum of MYO7A mutations that did not include alleles prevalent in other populations, such as p.Arg666* (United Kingdom), p.Arg241Gly (Italy), p.Gln821* (Spain), and p.Cys31* (Denmark). The three most common alleles (c.496delG, c.721C>T, c.1258A>T) only accounted for ~24% of the cases of deafness in the NCEMB study population and thus hierarchical mutation screening would not be a cost-effective approach for molecular diagnosis.",
+                "named_entity_list": [
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "MYO7A",
+                        "identifier": "4647",
+                        "offset": "15197",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "MYO7A",
+                        "identifier": "4647",
+                        "offset": "15316",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "MYO7A",
+                        "identifier": "4647",
+                        "offset": "15482",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Gene",
+                        "text": "MYO7A",
+                        "identifier": "4647",
+                        "offset": "15600",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Species",
+                        "text": "Human",
+                        "identifier": "9606",
+                        "offset": "15244",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Arg241Gly",
+                        "identifier": "p.R241G",
+                        "offset": "15713",
+                        "length": "11",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "c.1258A>T",
+                        "identifier": "c.1258A>T;RS#:782539587",
+                        "offset": "15829",
+                        "length": "9",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Arg666*",
+                        "identifier": "p.R666*",
+                        "offset": "15685",
+                        "length": "9",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "c.721C>T",
+                        "identifier": "c.721C>T;RS#:782166819",
+                        "offset": "15819",
+                        "length": "8",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Disease",
+                        "text": "deafness",
+                        "identifier": "MESH:D003638",
+                        "offset": "15880",
+                        "length": "8",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "p.Gln821*",
+                        "identifier": "p.Q821*",
+                        "offset": "15734",
+                        "length": "9",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "c.1258A>T",
+                        "identifier": "c.1258A>T;RS#:782539587",
+                        "offset": "15468",
+                        "length": "9",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "c.496delG",
+                        "identifier": "c.496delG;RS#:111033448",
+                        "offset": "15808",
+                        "length": "9",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "c.721C>T",
+                        "identifier": "c.721C>T;RS#:782166819",
+                        "offset": "15455",
+                        "length": "8",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Chemical",
+                        "text": "Cys31",
+                        "identifier": "-",
+                        "offset": "15759",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    }
+                ]
+            }
+        ],
+        "mesh_list": []
+    },
+    {
+        "py/object": "document.Document",
+        "data_struct_version": 1.0,
+        "source_file": "BioCXML/9466.bioc.xml",
+        "doc_id": "4170182",
+        "pmid": "21953985",
+        "pmcid": "4170182",
+        "publisher_item_identifier": "*",
+        "doi": "10.1002/prot.23159",
+        "license": "           This file is available for text mining. It may also be used consistent with the principles of fair use under the copyright law.         ",
+        "title": "Protein Stability and in Vivo Concentration of Missense Mutations in Phenylalanine Hydroxylase",
+        "abstract": "A previous computational analysis of missense mutations linked to monogenic disease found a high proportion of missense mutations affect protein stability, rather than other aspects of protein structure and function. The purpose of the present study is to relate the presence of such stability damaging missense mutations to the levels of a particular protein present under 'in vivo' like conditions, and to test the reliability of the computational methods. Experimental data on a set of missense mutations of the enzyme phenylalanine hydroxylase (PAH) associated with the monogenic disease phenylketonuria (PKU) have been compared with the expected in vivo impact on protein function, obtained using SNPs3D, an in silico analysis package. A high proportion of the PAH mutations are predicted to be destabilizing. The overall agreement between predicted stability impact and experimental evidence for lower protein levels is in accordance with the estimated error rates of the methods. For these mutations, destabilization of protein three dimensional structure is the major molecular mechanism leading to PKU, and results in a substantial reduction of in vivo PAH protein concentration. Although of limited scale, the results support the view that destabilization is the most common mechanism by which missense mutations cause monogenic disease. In turn, this conclusion suggests the general therapeutic strategy of developing drugs targeted at restoring wild type stability.",
+        "keyword": "missense mutation machine learning support vector machine protein structure protein stability phenylketonuria (PKU)",
+        "authors": "Shi Z, Sellers J, Moult J",
+        "subtitle": "*",
+        "journal": "Proteins; 2012 Jan; 80(1) 61-70. doi:10.1002/prot.23159",
+        "year": "2012",
+        "entrez_pub_date": "*",
+        "passage_list": [
+            {
+                "py/object": "document.Passage",
+                "section_type": "RESULTS",
+                "passage_type": "paragraph",
+                "offset": "11388",
+                "passage_text": "28 of the 35 mutations with destabilization assignments are remote from any known ligand binding or the catalytic site, and so are expected to have a low experimental protein level, and wild type specific activity. 16 of the 28 (F39L, G46S, L48S, I65T, A104D, P122Q, R157N, F161S, R243Q, R252G, R252Q, R252W, A259T, A259V, L311P, R408W) have protein levels less than 50% wild type, as expected. Of these, all but two have wild type specific activity. The two exceptions, F39L and L48S, have approximately three fold higher specific activities than the wild type. These mutations lie in the regulatory domain, suggesting a possible explanation for the high activity level. The 16 mutants are classified into clinical categories of mild PKU (A104D), moderate PKU (F39L, L48S, I65T), and classic PKU (G46S, R243Q, R252G/Q/W, A259V, L311P, R408W).",
+                "named_entity_list": [
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "L311P",
+                        "identifier": "p.L311P;RS#:62642936",
+                        "offset": "11711",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "F39L",
+                        "identifier": "p.F39L;RS#:62642926",
+                        "offset": "12150",
+                        "length": "4",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "L311P",
+                        "identifier": "p.L311P;RS#:62642936",
+                        "offset": "12217",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "R243Q",
+                        "identifier": "p.R243Q;RS#:62508588",
+                        "offset": "12192",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "P122Q",
+                        "identifier": "p.P122Q;RS#:199475622",
+                        "offset": "11648",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "R408W",
+                        "identifier": "p.R408W;RS#:5030858",
+                        "offset": "11718",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "L48S",
+                        "identifier": "p.L48S;RS#:5030841",
+                        "offset": "11629",
+                        "length": "4",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "A259T",
+                        "identifier": "c.259A>T;RS#:62642932",
+                        "offset": "11697",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "A104D",
+                        "identifier": "p.A104D;RS#:62642929",
+                        "offset": "11641",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "L48S",
+                        "identifier": "p.L48S;RS#:5030841",
+                        "offset": "11868",
+                        "length": "4",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "A104D",
+                        "identifier": "p.A104D;RS#:62642929",
+                        "offset": "12128",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "R243Q",
+                        "identifier": "p.R243Q;RS#:62508588",
+                        "offset": "11669",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "R408W",
+                        "identifier": "p.R408W;RS#:5030858",
+                        "offset": "12224",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "F161S",
+                        "identifier": "p.F161S;RS#:79635844",
+                        "offset": "11662",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Disease",
+                        "text": "PKU",
+                        "identifier": "MESH:D010661",
+                        "offset": "12181",
+                        "length": "3",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "I65T",
+                        "identifier": "p.I65T;RS#:75193786",
+                        "offset": "12162",
+                        "length": "4",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "A259V",
+                        "identifier": "p.A259V;RS#:118203921",
+                        "offset": "11704",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "R252Q",
+                        "identifier": "p.R252Q;RS#:62644503",
+                        "offset": "11683",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "R157N",
+                        "identifier": "p.R157N",
+                        "offset": "11655",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "I65T",
+                        "identifier": "p.I65T;RS#:75193786",
+                        "offset": "11635",
+                        "length": "4",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Disease",
+                        "text": "PKU",
+                        "identifier": "MESH:D010661",
+                        "offset": "12145",
+                        "length": "3",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "G46S",
+                        "identifier": "p.G46S;RS#:74603784",
+                        "offset": "11623",
+                        "length": "4",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "A259V",
+                        "identifier": "p.A259V;RS#:118203921",
+                        "offset": "12210",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "R252G",
+                        "identifier": "p.R252G;RS#:5030847",
+                        "offset": "12199",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "G46S",
+                        "identifier": "p.G46S;RS#:74603784",
+                        "offset": "12186",
+                        "length": "4",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "R252W",
+                        "identifier": "p.R252W;RS#:5030847",
+                        "offset": "11690",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "L48S",
+                        "identifier": "p.L48S;RS#:5030841",
+                        "offset": "12156",
+                        "length": "4",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "F39L",
+                        "identifier": "p.F39L;RS#:62642926",
+                        "offset": "11617",
+                        "length": "4",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "F39L",
+                        "identifier": "p.F39L;RS#:62642926",
+                        "offset": "11859",
+                        "length": "4",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Disease",
+                        "text": "PKU",
+                        "identifier": "MESH:D010661",
+                        "offset": "12123",
+                        "length": "3",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    }
+                ]
+            },
+            {
+                "py/object": "document.Passage",
+                "section_type": "RESULTS",
+                "passage_type": "paragraph",
+                "offset": "16618",
+                "passage_text": "Four of these, L255V, P281L, A322G, and L348V have atomic contacts of 6.5 A or less to a ligand. Experimental data for two, A322G and L348V, are consistent with expectations, with low activity and normal protein levels. The remaining two, L255V and P281L, have low activity, but also low protein level. Both are in direct contact with the BH4 cofactor, and would disrupt binding substantially. Experimental measurements for P281L show <1% or non-detectable for both total enzyme activity and protein level , and the mutant is classified as classic PKU. For L255V, two independent experimental measurements give <3% and 13% of wild type activity, and 8% and 18% of total protein . For both mutants, it is probable that the low protein level is consequence of reduced protein stability, arising from reduced ability to bind BH4, rather than direct destabilization of the protein structure.",
+                "named_entity_list": [
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "L255V",
+                        "identifier": "p.L255V;RS#:62642931",
+                        "offset": "16857",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "P281L",
+                        "identifier": "p.P281L;RS#:5030851",
+                        "offset": "17042",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "L255V",
+                        "identifier": "p.L255V;RS#:62642931",
+                        "offset": "16633",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Chemical",
+                        "text": "BH4",
+                        "identifier": "MESH:C003402",
+                        "offset": "17440",
+                        "length": "3",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Disease",
+                        "text": "PKU",
+                        "identifier": "MESH:D010661",
+                        "offset": "17166",
+                        "length": "3",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "L255V",
+                        "identifier": "p.L255V;RS#:62642931",
+                        "offset": "17175",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "P281L",
+                        "identifier": "p.P281L;RS#:5030851",
+                        "offset": "16867",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "L348V",
+                        "identifier": "p.L348V;RS#:62516092",
+                        "offset": "16658",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "A322G",
+                        "identifier": "c.322A>G;RS#:62514958",
+                        "offset": "16742",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "Chemical",
+                        "text": "BH4",
+                        "identifier": "MESH:C003402",
+                        "offset": "16957",
+                        "length": "3",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "P281L",
+                        "identifier": "p.P281L;RS#:5030851",
+                        "offset": "16640",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "DNAMutation",
+                        "text": "A322G",
+                        "identifier": "c.322A>G;RS#:62514958",
+                        "offset": "16647",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    },
+                    {
+                        "py/object": "document.NamedEntity",
+                        "type": "ProteinMutation",
+                        "text": "L348V",
+                        "identifier": "p.L348V;RS#:62516092",
+                        "offset": "16752",
+                        "length": "5",
+                        "description": "*",
+                        "algorithm": "PubTator"
+                    }
+                ]
+            }
+        ],
+        "mesh_list": []
+    }
+]
