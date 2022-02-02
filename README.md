@@ -34,5 +34,3 @@ Select which labels you would like to view and click 'Confirm Selection'
 ![Select Labels](https://github.com/WGLab/nlp_notes/blob/main/docs/images/labels.PNG)
 
 Any HPO terms that were detected by MetaMap, cTakes, or both will now be overlaid onto the original note for easy analysis
-
-![HPO Terms](https://github.com/WGLab/nlp_notes/blob/main/docs/images/hpo.PNG)
