@@ -1,4 +1,4 @@
-# nlp_notes
+# TermViewer
 Repository for NLP project filtering medical notes
 
 scripts: contains the programs that will generate tagged notes, tagged notes are formatted as JSON files and include the note as well as information about the HPO terms found in those notes using MetaMap and cTakes
