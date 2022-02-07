@@ -167,6 +167,77 @@ def createJSON(txt_fp, mm_fp, ctakes_fp, out_fp, doc_name):
     with open(out_fp + doc_name + ".json", 'w') as f:
         json.dump(output, f)
 
+def createEntry(txt_fp, mm_fp, ctakes_fp, doc_name):
+    # load text file
+    with open(txt_fp + doc_name + ".txt", 'r') as f:
+        file_content = f.read()
+    # load mm
+    mm_dict = read_mm(mm_fp + doc_name + ".json", file_content)
+    # load ctakes
+    ctakes_dict = read_ctakes(ctakes_fp + doc_name + ".txt.xmi", file_content)
+    ne_list = []
+    for word in mm_dict:
+        if word in ctakes_dict:
+            ne_list.append({"py/object": "document.NamedEntity",
+                            "type": "MetaMap and cTakes",
+                            "text": "general",
+                            "identifier": mm_dict[word]["umls_id"],
+                            "offset": word[0],
+                            "length": word[1],
+                            "description": "*",
+                            "algorithm": "MetaMap and cTakes"})
+        else:
+            ne_list.append({"py/object": "document.NamedEntity",
+                            "type": "MetaMap",
+                            "text": "general",
+                            "identifier": mm_dict[word]["umls_id"],
+                            "offset": word[0],
+                            "length": word[1],
+                            "description": "*",
+                            "algorithm": "MetaMap"})
+    for word in ctakes_dict:
+        if word not in mm_dict:
+            ne_list.append({"py/object": "document.NamedEntity",
+                            "type": "CTakes",
+                            "text": "general",
+                            "identifier": ctakes_dict[word]["umls_id"],
+                            "offset": word[0],
+                            "length": word[1],
+                            "description": "*",
+                            "algorithm": "MetaMap"})
+    result =  {"py/object": "document.Document",
+               "note_val": "unknown",
+               "note_read": "false",
+               "data_struct_version": 1.0,
+               "source_file": txt_fp + doc_name + ".txt",
+               "doc_id": doc_name,
+               "pmid": "",
+               "pmcid": "",
+               "publisher_item_identifier": "*",
+               "doi": "",
+               "license": "***",
+               "title": "Patient Note: " + txt_fp + doc_name + ".txt",
+               "abstract": "",
+               "keyword": "",
+               "authors": "",
+               "subtitle": "*",
+               "journal": "",
+               "year": "",
+               "entrez_pub_date": "*",
+               "passage_list": [
+                   {
+                       "py/object": "document.Passage",
+                       "section_type": "RESULTS",
+                       "passage_type": "paragraph",
+                       "offset": "0",
+                       "passage_text": file_content,
+                       "named_entity_list": ne_list}],
+               "mesh_list": []}
+
+    return result
+    # with open(out_fp + doc_name + ".json", 'w') as f:
+    #     json.dump(output, f)
+
 print(sys.argv)
 #Check for commandline arguments
 if len(sys.argv) == 6:
@@ -185,6 +256,9 @@ if single_file:
     createJSON(txt_fp, mm_fp, ctakes_fp, storage_fp, test_filename)
 else:
     files = [x.split('/')[-1][:-4] for x in glob.glob(txt_fp + '/*.txt')]
+    output = []
     for file in files:
         print(file)
-        createJSON(txt_fp, mm_fp, ctakes_fp, storage_fp, file)
+        output.append(createEntry(txt_fp, mm_fp, ctakes_fp, file))
+    with open(storage_fp + "FolderOutput" + ".json", 'w') as f:
+        json.dump(output, f)
