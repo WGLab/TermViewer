@@ -1,6 +1,6 @@
 "use strict";
 
-let docID = 0;
+var docID = 0;
 let passageID = 0;
 let totalDocs = 0;
 
@@ -153,6 +153,7 @@ function preprocessingInputJsonObject(inputJsonObject) {
                 }
 
             }
+            //}
             // sort named entities by start position
             inputJsonObject[i].passage_list[j].named_entity_list.sort(compareStartPosition);
             inputJsonObject[i].passage_list[j].backup_named_entity_list = JSON.parse(JSON.stringify(inputJsonObject[i].passage_list[j].named_entity_list));
@@ -260,12 +261,13 @@ function initMainRegion() {
     mainRegionHTML += '<strong>Title: <span id="docTitle"></span></strong><br><br>';
     //Create tag
     mainRegionHTML += '<strong> Is this a good note? </strong>';
+    mainRegionHTML += '<div id="docLabel">'
     if (inputJsonObject[docID].note_val == 'false') {
-        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk noLabel">N</span><br><br>`;
+        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk noLabel">N</span></div><br><br>`;
     } else if (inputJsonObject[docID].note_val == 'true') {
-        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk yesLabel">Y</span><br><br>`;
+        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
     } else {
-        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk unkLabel">?</span><br><br>`;
+        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
     }
 
     mainRegionHTML += '<div id="mainBox" class="mainbox"><pre>Here is the main text</pre></div>';
@@ -297,13 +299,24 @@ function displayDocumentInfo() {
         document.getElementById('pmcid').innerHTML = 'N.A.';
     }
 
+    let labelHTML = ""
+
     if (inputJsonObject[docID].note_val == 'false') {
-        document.getElementById('docAnnotation').innerHTML = 'N';
+        labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk noLabel">N</span></div><br><br>`;
     } else if (inputJsonObject[docID].note_val == 'true') {
-        document.getElementById('docAnnotation').innerHTML = 'Y';
+        labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
     } else {
-        document.getElementById('docAnnotation').innerHTML = '?';
+        labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
     }
+
+    document.getElementById('docLabel').innerHTML = labelHTML;
+//    if (inputJsonObject[docID].note_val == 'false') {
+//        document.getElementById('docAnnotation').innerHTML = 'N';
+//    } else if (inputJsonObject[docID].note_val == 'true') {
+//        document.getElementById('docAnnotation').innerHTML = 'Y';
+//    } else {
+//        document.getElementById('docAnnotation').innerHTML = '?';
+//    }
 }
 
 function clearHTMLAfterResetSelection() {
