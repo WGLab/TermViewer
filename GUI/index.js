@@ -2,6 +2,7 @@
 
 let docID = 0;
 let passageID = 0;
+let totalDocs = 0;
 
 let inputFileString = '';
 let inputJsonObject = '';
@@ -108,6 +109,10 @@ function loadInputJsonFile(event) {
 
 function preprocessingInputJsonObject(inputJsonObject) {
 
+    totalDocs = inputJsonObject.length
+    console.log("Total Docs read as: " + totalDocs)
+    console.log("Length: " + inputJsonObject.length)
+
     for (let i = 0; i < inputJsonObject.length; i++) // i: docID 
     {
         for (let j = 0; j < inputJsonObject[i].passage_list.length; j++) // j: passageID
@@ -175,7 +180,7 @@ function preprocessingInputJsonObject(inputJsonObject) {
     for (let i = 0; i < allNamedEntityTypeList.length; i++) {
         type = allNamedEntityTypeList[i];
         count = allNamedEntityTypeDict[type];
-        namedEntityTypeSelectionInfo += `<label class="checkboxLabel"><input type="checkbox" class="largeCheckbox" name="selectNamedEntityTypes">${type} (count: ${count} )</label><br>`;
+        namedEntityTypeSelectionInfo += `<label class="checkboxLabel"><input type="checkbox" class="largeCheckbox" name="selectNamedEntityTypes" checked>${type} (count: ${count} )</label><br>`;
 
     }
 
@@ -252,10 +257,20 @@ function initMainRegion() {
     mainRegionHTML += '<button class="largeButton " id="buttonReset" onclick="buttonResetClicked()">Reset passage</button> &nbsp;&nbsp;';
     mainRegionHTML += '<button class="largeButton" id="buttonNext" onclick="buttonNextClicked()" >Next passage  &#10095;</button>';
     mainRegionHTML += '&nbsp;&nbsp; <button class="largeButton" id="buttonNext" onclick="buttonSaveClicked()" >Save</button><br><br>';
-    mainRegionHTML += '<strong>Title: <span id="docTitle"></span></strong>';
-    mainRegionHTML += '<div id="mainBox" class="mainbox">Here is the main text</div>';
+    mainRegionHTML += '<strong>Title: <span id="docTitle"></span></strong><br><br>';
+    //Create tag
+    mainRegionHTML += '<strong> Is this a good note? </strong>';
+    if (inputJsonObject[docID].note_val == 'false') {
+        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk noLabel">N</span><br><br>`;
+    } else if (inputJsonObject[docID].note_val == 'true') {
+        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk yesLabel">Y</span><br><br>`;
+    } else {
+        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk unkLabel">?</span><br><br>`;
+    }
+
+    mainRegionHTML += '<div id="mainBox" class="mainbox"><pre>Here is the main text</pre></div>';
     mainRegionHTML += '<div id="labelNamedEntities"></div>'
-    mainRegionHTML += '<br><br>showing passage <span id="passageID" class="docInfoSpan" >0</span> of document <span id="docID" class="docInfoSpan" >0</span>.';
+    mainRegionHTML += '<br><br>showing passage <span id="passageID" class="docInfoSpan" >0</span> of document <span id="docID" class="docInfoSpan" >0</span> out of <span id="totalDocs" class="docInfoSpan" >0</span>.';
     mainRegionHTML += '&nbsp;&nbsp;&nbsp;&nbsp;PMID: <span id="pmid" class="docInfoSpan" >N.A.</span>&nbsp;&nbsp;&nbsp;&nbsp;PMCID: <span id="pmcid" class="docInfoSpan" >N.A.</span></p>';
 
     document.getElementById('mainRegion').innerHTML = mainRegionHTML;
@@ -266,6 +281,7 @@ function displayDocumentInfo() {
     document.getElementById('docTitle').innerHTML = inputJsonObject[docID].title;
     document.getElementById('passageID').innerHTML = (passageID + 1).toString();
     document.getElementById('docID').innerHTML = (docID + 1).toString();
+    document.getElementById('totalDocs').innerHTML = (totalDocs + 1).toString();
 
     let pmid = inputJsonObject[docID].pmid.toString();
     let pmcid = inputJsonObject[docID].pmcid.toString();
@@ -281,6 +297,13 @@ function displayDocumentInfo() {
         document.getElementById('pmcid').innerHTML = 'N.A.';
     }
 
+    if (inputJsonObject[docID].note_val == 'false') {
+        document.getElementById('docAnnotation').innerHTML = 'N';
+    } else if (inputJsonObject[docID].note_val == 'true') {
+        document.getElementById('docAnnotation').innerHTML = 'Y';
+    } else {
+        document.getElementById('docAnnotation').innerHTML = '?';
+    }
 }
 
 function clearHTMLAfterResetSelection() {
@@ -367,6 +390,25 @@ function displayLabelButtons() {
         document.getElementById('labelNamedEntities').innerHTML += `<button class="namedEntityButton color${typeId}" id="buttonLabelNamedEntity${typeId}" onclick="addNamedEntityAnnotation('${entityType}')">${entityType}</button> &nbsp; &nbsp; &nbsp; &nbsp;`;
     }
 
+}
+
+//function addDocumentAnnotation(annotationVal) {
+//    inputJsonObject[docID].note_val = annotationVal
+//}
+//
+function changeDocStatus(docID) {
+    if (inputJsonObject[docID].note_val == 'true') {
+        inputJsonObject[docID].note_val = 'false';
+    } else if (inputJsonObject[docID].note_val == 'unknown') {
+        inputJsonObject[docID].note_val = 'true';
+    } else if (inputJsonObject[docID].note_val == 'false') {
+        inputJsonObject[docID].note_val = 'unknown';
+    } else {
+        alert('ERROR! unknown entity status!');
+    }
+
+    displayDocumentInfo();
+    return;
 }
 
 function addNamedEntityAnnotation(entityType) {
