@@ -91,7 +91,18 @@ function loadInputJsonFile(event) {
     allNamedEntityTypeDict = new Object();
     allNamedEntityTypeList = [];
 
-    let inputJsonFile = event.target.files[0];
+    var inputJsonFile;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+       // Typical action to be performed when the document is ready:
+        inputJsonFile = xhttp.responseText;
+    }
+    };
+    console.log(document.getElementById("patient_file").value)
+    xhttp.open("GET", document.getElementById("patient_file").value , true);
+    xhttp.send();
+    //let inputJsonFile = event.target.files[0];
     if (!inputJsonFile) {
         return null;
     }
@@ -483,4 +494,4 @@ function changeEntityStatus(entityId, del = false) {
     return;
 }
 
-document.getElementById('fileInputBox').addEventListener('change', loadInputJsonFile);
+document.getElementById('patient_file').addEventListener('change', loadInputJsonFile);
