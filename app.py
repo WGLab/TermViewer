@@ -10,8 +10,17 @@ def index():
     patients = get_notesets()
     return render_template('termviewer.html', patients=patients)
 
+@app.route('/get_file/<path:path>', methods=['GET'])
+def get_json_file(path):
+    print(path)
+    with open(path, 'r', encoding='utf8') as f:
+        text = f.read()
+    return text
+
 def get_next_note(notes):
     return notes.fetchone()
+
+
 
 def get_notesets():
     conn = get_db_connection()

@@ -91,31 +91,47 @@ function loadInputJsonFile(event) {
     allNamedEntityTypeDict = new Object();
     allNamedEntityTypeList = [];
 
-    var inputJsonFile;
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-       // Typical action to be performed when the document is ready:
-        inputJsonFile = xhttp.responseText;
-    }
-    };
-    console.log(document.getElementById("patient_file").value)
-    xhttp.open("GET", document.getElementById("patient_file").value , true);
-    xhttp.send();
+    var file_path = document.getElementById("patient_file").value;//"test_files/Z123115.json"//
+
+    fetch(`/get_file/${file_path}`)
+      .then(function (response) {
+          console.log(response);
+          return response.text();
+      }).then(function (text) {
+          console.log('GET successful');
+          inputFileString = text.toString();
+          inputJsonObject = JSON.parse(inputFileString);
+          preprocessingInputJsonObject(inputJsonObject);
+          //console.log(text);
+      });
+
+    //inputFileString = evt.target.result;
+    //console.log(inputFileString)
+
+//    var xhttp = new XMLHttpRequest();
+//    xhttp.onreadystatechange = function() {
+//    if (this.readyState == 4 && this.status == 200) {
+//       // Typical action to be performed when the document is ready:
+//        inputJsonFile = xhttp.responseText;
+//    }
+//    };
+//    console.log(document.getElementById("patient_file").value)
+//    xhttp.open("GET", "file://127.0.0.1/" + document.getElementById("patient_file").value , true);
+//    xhttp.send();
     //let inputJsonFile = event.target.files[0];
-    if (!inputJsonFile) {
-        return null;
-    }
-    let reader = new FileReader();
-    reader.onload = function (evt) {
-        inputFileString = evt.target.result;
-        inputJsonObject = JSON.parse(inputFileString);
-        preprocessingInputJsonObject(inputJsonObject);
-    }
-    reader.onerror = function (evt) {
-        document.getElementById('mainBox').innerHTML = 'Error reading input json file';
-    }
-    reader.readAsText(inputJsonFile, "UTF-8");
+//    if (!inputJsonFile) {
+//        return null;
+//    }
+//    let reader = new FileReader();
+//    reader.onload = function (evt) {
+//        inputFileString = evt.target.result;
+//        inputJsonObject = JSON.parse(inputFileString);
+//        preprocessingInputJsonObject(inputJsonObject);
+//    }
+//    reader.onerror = function (evt) {
+//        document.getElementById('mainBox').innerHTML = 'Error reading input json file';
+//    }
+//    reader.readAsText(inputJsonFile, "UTF-8");
 }
 
 function preprocessingInputJsonObject(inputJsonObject) {
