@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Named Entity Labeling</title>
-  <link href="style.css" , rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -15,12 +15,19 @@
   </div>
   <div class="container">
     <h3 style="text-align: center">A Visualization Tool for HPO Terms</h3>
+    <h2> Choose the patient noteset you would like to annotate:<SELECT id="patient_file">
+      {% for patient in patients %}
+      <OPTION value={{patient[0]}}>{{patient[1]}}</OPTION>
+      {% endfor %}
+    </SELECT>
+    </h2>
     <h3>Please choose your input json file: <input type="file" id="fileInputBox" /></h3>
+
     <div id="namedEntityTypeSelection"></div>
     <div id="showColor"></div>
     <div id="mainRegion"></div>
     <br><br><br><br><br><br><br><br><br><br><br>
-    <script src="index.js"></script>
+    <script src="{{ url_for('static', filename= 'js/index.js') }}"></script>
   </div>
 </body>
 
