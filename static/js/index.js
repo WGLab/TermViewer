@@ -289,13 +289,36 @@ function initMainRegion() {
     //Create tag
     mainRegionHTML += '<strong> Is this a good note? </strong>';
     mainRegionHTML += '<div id="docLabel">'
-    if (inputJsonObject[docID].note_val == 'false') {
-        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk noLabel">N</span></div><br><br>`;
-    } else if (inputJsonObject[docID].note_val == 'true') {
-        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
-    } else {
-        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
-    }
+
+    var path = inputJsonObject[docID].title
+    var evaluator = document.getElementById('name').value
+    fetch(`/get_score/${path}/${evaluator}`)
+      .then(function (response) {
+          return response.text();
+      }).then(function (text) {
+          console.log(text)
+          var val = parseInt(text)
+          if (val == 0) {
+            mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk noLabel">N</span></div><br><br>`;
+        } else if (val == 1) {
+            mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
+        } else {
+            mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
+        }
+//          console.log('GET successful');
+//          inputFileString = text.toString();
+//          inputJsonObject = JSON.parse(inputFileString);
+//          preprocessingInputJsonObject(inputJsonObject);
+          //console.log(text);
+      });
+
+//    if (inputJsonObject[docID].note_val == 'false') {
+//        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk noLabel">N</span></div><br><br>`;
+//    } else if (inputJsonObject[docID].note_val == 'true') {
+//        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
+//    } else {
+//        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
+//    }
 
     mainRegionHTML += '<div id="mainBox" class="mainbox"><pre>Here is the main text</pre></div>';
     mainRegionHTML += '<div id="labelNamedEntities"></div>'
@@ -328,13 +351,23 @@ function displayDocumentInfo() {
 
     let labelHTML = ""
 
-    if (inputJsonObject[docID].note_val == 'false') {
-        labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk noLabel">N</span></div><br><br>`;
-    } else if (inputJsonObject[docID].note_val == 'true') {
-        labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
-    } else {
-        labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
-    }
+    var path = inputJsonObject[docID].title
+    var evaluator = document.getElementById('name').value
+    fetch(`/get_score/${path}/${evaluator}`)
+      .then(function (response) {
+          return response.text();
+      }).then(function (text) {
+          console.log(text)
+          var val = parseInt(text)
+          if (val == 0) {
+            labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk noLabel">N</span></div><br><br>`;
+        } else if (val == 1) {
+            labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
+        } else {
+            labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
+        }
+
+      });
 
     document.getElementById('docLabel').innerHTML = labelHTML;
 //    if (inputJsonObject[docID].note_val == 'false') {

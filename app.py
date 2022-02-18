@@ -17,6 +17,24 @@ def get_json_file(path):
         text = f.read()
     return text
 
+@app.route('/get_score/<path:path>/<evaluator>', methods=['GET'])
+def get_score(path, evaluator):
+    print(path, evaluator)
+    conn = get_db_connection()
+    score = conn.execute('SELECT * FROM scores WHERE evaluator = ? AND file_path = ?',
+                         (evaluator, path)).fetchone()
+    conn.close()
+    if score is None:
+        return str(-1)
+    return str(score)
+
+@app.route('/update_score/<path:path>/evaluator/score', methods=['POST'])
+def update_score(path, evaluator, score):
+    conn = get_db_connection()
+    # score = conn.execute('SELECT * FROM scores WHERE evaluator = ? AND file_path = ?',
+    #                      (evaluator, path)).fetchone()
+    conn.close()
+
 def get_next_note(notes):
     return notes.fetchone()
 
@@ -32,11 +50,4 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-def get_score(note_id):
-    conn = get_db_connection()
-    score = conn.execute('SELECT * FROM scores WHERE note_id = ?',
-                         (note_id,)).fetchone()
-    conn.close()
-    if score is None:
-        abort(404)
-    return score
+
