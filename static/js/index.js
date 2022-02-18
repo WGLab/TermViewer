@@ -91,9 +91,31 @@ function loadInputJsonFile(event) {
     allNamedEntityTypeDict = new Object();
     allNamedEntityTypeList = [];
 
-    var file_path = document.getElementById("patient_file").value;//"test_files/Z123115.json"//
+    var file_path = document.getElementById("patient_file").value; //"test_files/Z123115.json"//
+    
+    //sessionStorage['file_path'] = file_path
 
-    fetch(`/get_file/${file_path}`)
+    $.getJSON($SCRIPT_ROOT + '/get_file', {
+        path: file_path
+        }, function(response) {
+	    //console.log(path);
+	    console.log(response.result);
+            console.log('GET successful');	
+            //inputFileString = text.toString();
+            inputJsonObject = JSON.parse(response.result);
+            preprocessingInputJsonObject(inputJsonObject);
+            //console.log(text);
+        });
+/*
+//console.log(data);
+	    console.log(response);
+	    inputFileString = response.toString();
+	    inputJSONObject = JSON.parse(inputFileString);
+	    preprocessingInputJSONObject(inputJsonObject);
+            }
+        );
+    /*
+    fetch(`/get_file`)
       .then(function (response) {
           console.log(response);
           return response.text();
@@ -104,6 +126,7 @@ function loadInputJsonFile(event) {
           preprocessingInputJsonObject(inputJsonObject);
           //console.log(text);
       });
+	*/
 
     //inputFileString = evt.target.result;
     //console.log(inputFileString)
