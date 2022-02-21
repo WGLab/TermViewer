@@ -1,6 +1,6 @@
 import sqlite3
 
-from flask import Flask, render_template
+from flask import Flask, render_template, session, request, jsonify
 from werkzeug.exceptions import abort
 
 app = Flask(__name__)
@@ -10,12 +10,15 @@ def index():
     patients = get_notesets()
     return render_template('termviewer.html', patients=patients)
 
-@app.route('/get_file/<path:path>', methods=['GET'])
-def get_json_file(path):
+@app.route('/get_file', methods = ['GET', 'POST']) #, defaults={'path': '/'})
+#@app.route('/get_file/<path:path>')
+#@app.route('/get_file/<root_path:path>')
+def get_file():
+    path = request.args.get('path')
     print(path)
-    with open(path, 'r', encoding='utf8') as f:
+    with open( path, 'r', encoding='utf8') as f:
         text = f.read()
-    return text
+    return jsonify(result = text)
 
 @app.route('/get_score/<path:path>/<evaluator>', methods=['GET'])
 def get_score(path, evaluator):
