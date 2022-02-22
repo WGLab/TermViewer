@@ -26,12 +26,14 @@ function buttonPrevClicked() {
 
     if (passageID > 0) {
         passageID -= 1;
-        displayDocumentInfo();
+	updateScore();
+        //displayDocumentInfo();
         display1PassageInMainBox();
     } else if (docID > 0) {
         docID -= 1;
         passageID = inputJsonObject[docID].passage_list.length - 1;
-        displayDocumentInfo();
+        updateScore();
+	//displayDocumentInfo();
         display1PassageInMainBox();
     } else {
         alert("This is the first passage!");
@@ -49,12 +51,14 @@ function buttonNextClicked() {
 
     if (passageID + 1 < inputJsonObject[docID].passage_list.length) {
         passageID += 1;
-        displayDocumentInfo();
+        updateScore();
+	//displayDocumentInfo();
         display1PassageInMainBox();
     } else if (docID + 1 < inputJsonObject.length) {
         docID += 1;
         passageID = 0;
-        displayDocumentInfo();
+	updateScore();
+        //displayDocumentInfo();
         display1PassageInMainBox();
     } else {
         alert("This is the last passage!");
@@ -278,7 +282,8 @@ function confirmSelection() {
     }
 
     showColorForNamedEntities();
-    initMainRegion;
+    initMainRegion();
+    console.log('Finished Initiating');
     display1PassageInMainBox();
     return;
 }
@@ -299,7 +304,7 @@ function showColorForNamedEntities() {
 
 //Get score from server and use it to create tag
 function updateScore() {
-    let note_path = inputJsonObject[docID].title;
+    let note_path = inputJsonObject[docID].source_file;
     let evaluator = document.getElementById('name').value;
 
     $.getJSON($SCRIPT_ROOT + '/get_score', {
@@ -326,9 +331,9 @@ function initMainRegion() {
     mainRegionHTML += '<strong>Title: <span id="docTitle"></span></strong><br><br>';
     //Create tag
     mainRegionHTML += '<strong> Is this a good note? </strong>';
-    mainRegionHTML += '<div id="docLabel">'
+    mainRegionHTML += '<div id="docLabel"></div>';
    
-    console.log('Initiating main region')
+    console.log('Initiating main region');
 
 //    if (score == 0) {
 //        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID}, ${val})" class="yesNoUnk noLabel">N</span></div><br><br>`;
@@ -345,7 +350,7 @@ function initMainRegion() {
     mainRegionHTML += '<div id="labelNamedEntities"></div>'
     mainRegionHTML += '<br><br>showing passage <span id="passageID" class="docInfoSpan" >0</span> of document <span id="docID" class="docInfoSpan" >0</span> out of <span id="totalDocs" class="docInfoSpan" >0</span>.';
     mainRegionHTML += '&nbsp;&nbsp;&nbsp;&nbsp;PMID: <span id="pmid" class="docInfoSpan" >N.A.</span>&nbsp;&nbsp;&nbsp;&nbsp;PMCID: <span id="pmcid" class="docInfoSpan" >N.A.</span></p>';
-    console.log(mainRegionHTML);
+    //console.log(mainRegionHTML);
     document.getElementById('mainRegion').innerHTML = mainRegionHTML;
     //Gets score and displays doc info
     updateScore();
@@ -374,13 +379,13 @@ function displayDocumentInfo(score) {
     let labelHTML = "";
 
     if (score == 0) {
-        labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID}, ${val})" class="yesNoUnk noLabel">N</span></div><br><br>`;
+        labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID}, ${score})" class="yesNoUnk noLabel">N</span></div><br><br>`;
     } else if (score == 1) {
-        labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID}, ${val})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
+        labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID}, ${score})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
     } else {
 		score = -1
 		console.log('GOT UNKNOWN VAL')
-        labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID}, ${val})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
+        labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID}, ${score})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
     }
 
 //    let note_path = inputJsonObject[docID].title;
@@ -401,8 +406,11 @@ function displayDocumentInfo(score) {
 //            }
 //        });
 
+    //console.log("doc HTML before adding label");
+    //console.log(document.getElementById('mainRegion').innerHTML);
     document.getElementById('docLabel').innerHTML = labelHTML;
-
+    //console.log("doc HTML after adding label");
+    //console.log(document.getElementById('mainRegion').innerHTML);
 }
 
 function clearHTMLAfterResetSelection() {
@@ -497,7 +505,7 @@ function displayLabelButtons() {
 //
 function changeDocStatus(docID, current_score) {
 
-    var note_path = inputJsonObject[docID].title
+    var note_path = inputJsonObject[docID].source_file
     var evaluator = document.getElementById('name').value
     var new_score;
 
@@ -511,11 +519,25 @@ function changeDocStatus(docID, current_score) {
         alert('ERROR! unknown entity status!');
     }
 
+    console.log(note_path);
+    console.log(evaluator);
+    console.log(new_score);
+    
     $.getJSON($SCRIPT_ROOT + '/set_score', {
         path: note_path,
         evaluator: evaluator,
+	score: new_score
+        }, function(response) {
+	    //console.log(response.score);
+            console.log('Updated Score');
+            //displayDocumentInfo(response.score)
+        });
+/*
+    $.post($SCRIPT_ROOT + '/set_score', {"data" : JSON.stringify({
+        path: note_path,
+        evaluator: evaluator,
         score: new_score
-    });
+    })});*/
 
     updateScore();
     return;

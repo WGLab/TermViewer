@@ -24,30 +24,41 @@ def get_score():
     evaluator = request.args.get('evaluator')
     print(note_path, evaluator)
     conn = get_db_connection()
-    score = conn.execute('SELECT * FROM scores WHERE evaluator = ? AND file_path = ?',
+    score = conn.execute('SELECT score FROM scores WHERE evaluator = ? AND file_path = ?',
                          (evaluator, note_path)).fetchone()
     conn.close()
+    #score = int(score[0])
     if score is None:
         return jsonify(score=-1)
-    return jsonify(score=score)
+    print("got score: ", int(score[0]))
+    return jsonify(score=int(score[0]))
 
-@app.route('/set_score', methods=['POST'])
+@app.route('/set_score', methods=['GET', 'POST'])
 def set_score():
     note_path = request.args.get('path')
     evaluator = request.args.get('evaluator')
     score = request.args.get('score')
-    print(note_path, evaluator)
+    print(note_path, evaluator, score)
     conn = get_db_connection()
-    current_val = conn.execute('SELECT * FROM scores WHERE evaluator = ? AND file_path = ?',
+    cursor = conn.cursor()
+    current_val = conn.execute('SELECT score FROM scores WHERE evaluator = ? AND file_path = ?',
                          (evaluator, note_path)).fetchone()
 
     if current_val is None:
-        conn.execute("INSERT INTO scores (evaluator, file_path, score) VALUES (?, ?, ?)",
+        print("creating new record")
+        cursor.execute("INSERT INTO scores (evaluator, file_path, score) VALUES (?, ?, ?)",
                      (evaluator, note_path, score))
+        conn.commit()
+
     else:
-        conn.execute('UPDATE scores SET score = ? WHERE evaluator = ? AND file_path = ?',
+        print("updating score record")
+        cursor.execute('UPDATE scores SET score = ? WHERE evaluator = ? AND file_path = ?',
                      (score, evaluator, note_path))
+        conn.commit()
+        print("sql return", cursor.rowcount)
     conn.close()
+    if current_val: current_val = int(current_val[0])
+    return jsonify(prev_score=current_val)
 
 @app.route('/update_score/<path:path>/evaluator/score', methods=['POST'])
 def update_score(path, evaluator, score):
