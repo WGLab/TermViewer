@@ -313,27 +313,44 @@ function initMainRegion() {
     mainRegionHTML += '<strong> Is this a good note? </strong>';
     mainRegionHTML += '<div id="docLabel">'
 
-    var path = inputJsonObject[docID].title
+    var note_path = inputJsonObject[docID].title
     var evaluator = document.getElementById('name').value
-    fetch(`/get_score/${path}/${evaluator}`)
-      .then(function (response) {
-          return response.text();
-      }).then(function (text) {
-          console.log(text)
-          var val = parseInt(text)
-          if (val == 0) {
-            mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk noLabel">N</span></div><br><br>`;
-        } else if (val == 1) {
-            mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
-        } else {
-            mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
-        }
-//          console.log('GET successful');
-//          inputFileString = text.toString();
-//          inputJsonObject = JSON.parse(inputFileString);
-//          preprocessingInputJsonObject(inputJsonObject);
-          //console.log(text);
-      });
+
+    $.getJSON($SCRIPT_ROOT + '/get_score', {
+        path: note_path
+        evaluator: evaluator
+        }, function(response) {
+	    console.log(response.score);
+            console.log('GET successful');
+            var val = response.score
+            if (val == 0) {
+                mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk noLabel">N</span></div><br><br>`;
+            } else if (val == 1) {
+                mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
+            } else {
+                mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
+            }
+        });
+//
+//    fetch(`/get_score/${path}/${evaluator}`)
+//      .then(function (response) {
+//          return response.text();
+//      }).then(function (text) {
+//          console.log(text)
+//          var val = parseInt(text)
+//          if (val == 0) {
+//            mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk noLabel">N</span></div><br><br>`;
+//        } else if (val == 1) {
+//            mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
+//        } else {
+//            mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
+//        }
+////          console.log('GET successful');
+////          inputFileString = text.toString();
+////          inputJsonObject = JSON.parse(inputFileString);
+////          preprocessingInputJsonObject(inputJsonObject);
+//          //console.log(text);
+//      });
 
 //    if (inputJsonObject[docID].note_val == 'false') {
 //        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk noLabel">N</span></div><br><br>`;
@@ -374,23 +391,40 @@ function displayDocumentInfo() {
 
     let labelHTML = ""
 
-    var path = inputJsonObject[docID].title
+    var note_path = inputJsonObject[docID].title
     var evaluator = document.getElementById('name').value
-    fetch(`/get_score/${path}/${evaluator}`)
-      .then(function (response) {
-          return response.text();
-      }).then(function (text) {
-          console.log(text)
-          var val = parseInt(text)
-          if (val == 0) {
-            labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk noLabel">N</span></div><br><br>`;
-        } else if (val == 1) {
-            labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
-        } else {
-            labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
-        }
 
-      });
+    $.getJSON($SCRIPT_ROOT + '/get_score', {
+        path: note_path
+        evaluator: evaluator
+        }, function(response) {
+	    console.log(response.score);
+            console.log('GET successful');
+            var val = response.score
+            if (val == 0) {
+                labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk noLabel">N</span></div><br><br>`;
+            } else if (val == 1) {
+                labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
+            } else {
+                labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
+            }
+        });
+//
+//    fetch(`/get_score/${path}/${evaluator}`)
+//      .then(function (response) {
+//          return response.text();
+//      }).then(function (text) {
+//          console.log(text)
+//          var val = parseInt(text)
+//          if (val == 0) {
+//            labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk noLabel">N</span></div><br><br>`;
+//        } else if (val == 1) {
+//            labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
+//        } else {
+//            labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
+//        }
+//
+//      });
 
     document.getElementById('docLabel').innerHTML = labelHTML;
 //    if (inputJsonObject[docID].note_val == 'false') {
@@ -492,16 +526,29 @@ function displayLabelButtons() {
 //    inputJsonObject[docID].note_val = annotationVal
 //}
 //
-function changeDocStatus(docID) {
-    if (inputJsonObject[docID].note_val == 'true') {
-        inputJsonObject[docID].note_val = 'false';
-    } else if (inputJsonObject[docID].note_val == 'unknown') {
-        inputJsonObject[docID].note_val = 'true';
-    } else if (inputJsonObject[docID].note_val == 'false') {
-        inputJsonObject[docID].note_val = 'unknown';
+function changeDocStatus(docID, current_score) {
+
+    var note_path = inputJsonObject[docID].title
+    var evaluator = document.getElementById('name').value
+    var new_score;
+
+    if (current_score == 1) {
+        new_score = 0;
+    } else if (current_score == -1) {
+        new_score = 1;
+    } else if (current_score == 0) {
+        new_score = -1;
     } else {
         alert('ERROR! unknown entity status!');
     }
+
+    $.getJSON($SCRIPT_ROOT + '/set_score', {
+        path: note_path
+        evaluator: evaluator
+        score: new_score
+    });
+
+
 
     displayDocumentInfo();
     return;

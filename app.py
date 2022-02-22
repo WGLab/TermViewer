@@ -10,26 +10,44 @@ def index():
     patients = get_notesets()
     return render_template('termviewer.html', patients=patients)
 
-@app.route('/get_file', methods = ['GET', 'POST']) #, defaults={'path': '/'})
-#@app.route('/get_file/<path:path>')
-#@app.route('/get_file/<root_path:path>')
+@app.route('/get_file', methods = ['GET', 'POST'])
 def get_file():
     path = request.args.get('path')
     print(path)
     with open( path, 'r', encoding='utf8') as f:
         text = f.read()
-    return jsonify(result = text)
+    return jsonify(result=text)
 
-@app.route('/get_score/<path:path>/<evaluator>', methods=['GET'])
-def get_score(path, evaluator):
-    print(path, evaluator)
+@app.route('/get_score', methods=['GET', 'POST'])
+def get_score():
+    note_path = request.args.get('path')
+    evaluator = request.args.get('evaluator')
+    print(note_path, evaluator)
     conn = get_db_connection()
     score = conn.execute('SELECT * FROM scores WHERE evaluator = ? AND file_path = ?',
-                         (evaluator, path)).fetchone()
+                         (evaluator, note_path)).fetchone()
     conn.close()
     if score is None:
-        return str(-1)
-    return str(score)
+        return jsonify(score=-1)
+    return jsonify(score=score)
+
+@app.route('/set_score', methods=['POST'])
+def set_score():
+    note_path = request.args.get('path')
+    evaluator = request.args.get('evaluator')
+    score = request.args.get('score')
+    print(note_path, evaluator)
+    conn = get_db_connection()
+    current_val = conn.execute('SELECT * FROM scores WHERE evaluator = ? AND file_path = ?',
+                         (evaluator, note_path)).fetchone()
+
+    if current_val is None:
+        conn.execute("INSERT INTO scores (evaluator, file_path, score) VALUES (?, ?, ?)",
+                     (evaluator, note_path, score))
+    else:
+        conn.execute('UPDATE scores SET score = ? WHERE evaluator = ? AND file_path = ?',
+                     (score, evaluator, note_path))
+    conn.close()
 
 @app.route('/update_score/<path:path>/evaluator/score', methods=['POST'])
 def update_score(path, evaluator, score):
