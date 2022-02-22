@@ -530,6 +530,7 @@ function changeDocStatus(docID, current_score) {
         }, function(response) {
 	    //console.log(response.score);
             console.log('Updated Score');
+ 	    updateScore();
             //displayDocumentInfo(response.score)
         });
 /*
@@ -539,8 +540,8 @@ function changeDocStatus(docID, current_score) {
         score: new_score
     })});*/
 
-    updateScore();
-    return;
+    //updateScore();
+    //return;
 }
 
 function addNamedEntityAnnotation(entityType) {
