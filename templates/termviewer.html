@@ -2,41 +2,36 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Named Entity Labeling</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="{{
-  url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
-<script>
-  $SCRIPT_ROOT = {{ request.script_root|tojson }};
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Named Entity Labeling</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+    <script> $SCRIPT_ROOT = {{ request.script_root|tojson }};</script>
 </head>
 
 <body>
-  <div class="heading">
+<div class="heading">
     <h2>TermViewer</h2>
-  </div>
-  <div class="container">
+</div>
+<div class="container">
     <h3 style="text-align: center">A Visualization Tool for HPO Terms</h3>
     <label for="name">Evaluator name:</label>
     <input type="text" id="name" name="fname">
     <h2> Choose the patient noteset you would like to annotate:<SELECT id="patient_file">
-      {% for patient in patients %}
-      <OPTION value={{patient[0]}}>{{patient[1]}}</OPTION>
-      {% endfor %}
+        {% for patient in patients %}
+        <OPTION value={{patient[0]}}>{{patient[1]}}</OPTION>
+        {% endfor %}
     </SELECT>
     </h2>
-<!--    <h3>Please choose your input json file: <input type="file" id="fileInputBox" /></h3>-->
-
     <div id="namedEntityTypeSelection"></div>
     <div id="showColor"></div>
     <div id="mainRegion"></div>
     <br><br><br><br><br><br><br><br><br><br><br>
     <script src="{{ url_for('static', filename= 'js/index.js') }}" defer></script>
-  </div>
+</div>
 </body>
 
 </html>

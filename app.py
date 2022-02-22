@@ -5,11 +5,13 @@ from werkzeug.exceptions import abort
 
 app = Flask(__name__)
 
+#Initialize page and pass the list of available patient notesets
 @app.route('/')
 def index():
     patients = get_notesets()
     return render_template('termviewer.html', patients=patients)
 
+#Returns contents of requested json file
 @app.route('/get_file', methods = ['GET', 'POST'])
 def get_file():
     path = request.args.get('path')
@@ -18,65 +20,50 @@ def get_file():
         text = f.read()
     return jsonify(result=text)
 
+#Returns good/bad/unknown score for note
+#Requires path to original patient note and evaluator
 @app.route('/get_score', methods=['GET', 'POST'])
 def get_score():
     note_path = request.args.get('path')
     evaluator = request.args.get('evaluator')
-    print(note_path, evaluator)
     conn = get_db_connection()
     score = conn.execute('SELECT score FROM scores WHERE evaluator = ? AND file_path = ?',
                          (evaluator, note_path)).fetchone()
     conn.close()
-    #score = int(score[0])
     if score is None:
         return jsonify(score=-1)
-    print("got score: ", int(score[0]))
     return jsonify(score=int(score[0]))
 
+#Updates score if it exists in database or creates new entry
+#Requires path to original patient note, evaluator, and score
 @app.route('/set_score', methods=['GET', 'POST'])
 def set_score():
     note_path = request.args.get('path')
     evaluator = request.args.get('evaluator')
     score = request.args.get('score')
-    print(note_path, evaluator, score)
     conn = get_db_connection()
     cursor = conn.cursor()
     current_val = conn.execute('SELECT score FROM scores WHERE evaluator = ? AND file_path = ?',
                          (evaluator, note_path)).fetchone()
-
     if current_val is None:
-        print("creating new record")
         cursor.execute("INSERT INTO scores (evaluator, file_path, score) VALUES (?, ?, ?)",
                      (evaluator, note_path, score))
         conn.commit()
-
     else:
-        print("updating score record")
         cursor.execute('UPDATE scores SET score = ? WHERE evaluator = ? AND file_path = ?',
                      (score, evaluator, note_path))
         conn.commit()
-        print("sql return", cursor.rowcount)
     conn.close()
     if current_val: current_val = int(current_val[0])
     return jsonify(prev_score=current_val)
 
-@app.route('/update_score/<path:path>/evaluator/score', methods=['POST'])
-def update_score(path, evaluator, score):
-    conn = get_db_connection()
-    # score = conn.execute('SELECT * FROM scores WHERE evaluator = ? AND file_path = ?',
-    #                      (evaluator, path)).fetchone()
-    conn.close()
-
-def get_next_note(notes):
-    return notes.fetchone()
-
-
-
+#Get available annotated notesets (path to JSON on server)
 def get_notesets():
     conn = get_db_connection()
     notes = conn.execute('SELECT * FROM notes')
     return notes
 
+#Connect to DB
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row

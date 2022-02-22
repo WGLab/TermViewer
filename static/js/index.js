@@ -26,14 +26,12 @@ function buttonPrevClicked() {
 
     if (passageID > 0) {
         passageID -= 1;
-	updateScore();
-        //displayDocumentInfo();
+	    updateScore();
         display1PassageInMainBox();
     } else if (docID > 0) {
         docID -= 1;
         passageID = inputJsonObject[docID].passage_list.length - 1;
         updateScore();
-	//displayDocumentInfo();
         display1PassageInMainBox();
     } else {
         alert("This is the first passage!");
@@ -52,13 +50,11 @@ function buttonNextClicked() {
     if (passageID + 1 < inputJsonObject[docID].passage_list.length) {
         passageID += 1;
         updateScore();
-	//displayDocumentInfo();
         display1PassageInMainBox();
     } else if (docID + 1 < inputJsonObject.length) {
         docID += 1;
         passageID = 0;
 	updateScore();
-        //displayDocumentInfo();
         display1PassageInMainBox();
     } else {
         alert("This is the last passage!");
@@ -95,70 +91,15 @@ function loadInputJsonFile(event) {
     allNamedEntityTypeDict = new Object();
     allNamedEntityTypeList = [];
 
-    var file_path = document.getElementById("patient_file").value; //"test_files/Z123115.json"//
-    
-    //sessionStorage['file_path'] = file_path
+    var file_path = document.getElementById("patient_file").value;
 
     $.getJSON($SCRIPT_ROOT + '/get_file', {
         path: file_path
         }, function(response) {
-	    //console.log(path);
-	    //console.log(response.result);
             console.log('GET successful, file received');	
-            //inputFileString = text.toString();
             inputJsonObject = JSON.parse(response.result);
             preprocessingInputJsonObject(inputJsonObject);
-            //console.log(text);
         });
-/*
-//console.log(data);
-	    console.log(response);
-	    inputFileString = response.toString();
-	    inputJSONObject = JSON.parse(inputFileString);
-	    preprocessingInputJSONObject(inputJsonObject);
-            }
-        );
-    /*
-    fetch(`/get_file`)
-      .then(function (response) {
-          console.log(response);
-          return response.text();
-      }).then(function (text) {
-          console.log('GET successful');
-          inputFileString = text.toString();
-          inputJsonObject = JSON.parse(inputFileString);
-          preprocessingInputJsonObject(inputJsonObject);
-          //console.log(text);
-      });
-	*/
-
-    //inputFileString = evt.target.result;
-    //console.log(inputFileString)
-
-//    var xhttp = new XMLHttpRequest();
-//    xhttp.onreadystatechange = function() {
-//    if (this.readyState == 4 && this.status == 200) {
-//       // Typical action to be performed when the document is ready:
-//        inputJsonFile = xhttp.responseText;
-//    }
-//    };
-//    console.log(document.getElementById("patient_file").value)
-//    xhttp.open("GET", "file://127.0.0.1/" + document.getElementById("patient_file").value , true);
-//    xhttp.send();
-    //let inputJsonFile = event.target.files[0];
-//    if (!inputJsonFile) {
-//        return null;
-//    }
-//    let reader = new FileReader();
-//    reader.onload = function (evt) {
-//        inputFileString = evt.target.result;
-//        inputJsonObject = JSON.parse(inputFileString);
-//        preprocessingInputJsonObject(inputJsonObject);
-//    }
-//    reader.onerror = function (evt) {
-//        document.getElementById('mainBox').innerHTML = 'Error reading input json file';
-//    }
-//    reader.readAsText(inputJsonFile, "UTF-8");
 }
 
 function preprocessingInputJsonObject(inputJsonObject) {
@@ -200,14 +141,12 @@ function preprocessingInputJsonObject(inputJsonObject) {
                     continue;
                 } else if ('offset' in inputJsonObject[i].passage_list[j].named_entity_list[k]) {
                     inputJsonObject[i].passage_list[j].named_entity_list[k].start = inputJsonObject[i].passage_list[j].named_entity_list[k].offset - inputJsonObject[i].passage_list[j].offset;
-                    //console.log(inputJsonObject[i].passage_list[j].offset)
                     inputJsonObject[i].passage_list[j].named_entity_list[k].end = inputJsonObject[i].passage_list[j].named_entity_list[k].start + inputJsonObject[i].passage_list[j].named_entity_list[k].length;
                 } else {
                     alert('ERROR! unknown position of named entities!');
                 }
 
             }
-            //}
             // sort named entities by start position
             inputJsonObject[i].passage_list[j].named_entity_list.sort(compareStartPosition);
             inputJsonObject[i].passage_list[j].backup_named_entity_list = JSON.parse(JSON.stringify(inputJsonObject[i].passage_list[j].named_entity_list));
@@ -291,12 +230,10 @@ function confirmSelection() {
 
 function showColorForNamedEntities() {
 
-    // document.getElementById('showColor').innerHTML = '<hr><h3>Named entities will be highlighted as follows: </h3>';
     let typeId = 0;
     let entityType;
     for (entityType in highlightedNamedEntityTypeDict) {
         highlightedNamedEntityTypeDict[entityType] = typeId;
-        // document.getElementById('showColor').innerHTML += `<mark class="namedEntity color${typeId}" id="buttonLabelNamedEntity${typeId}">${entityType}</mark> &nbsp;`;
         typeId += 1;
     }
 
@@ -335,22 +272,10 @@ function initMainRegion() {
    
     console.log('Initiating main region');
 
-//    if (score == 0) {
-//        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID}, ${val})" class="yesNoUnk noLabel">N</span></div><br><br>`;
-//    } else if (score == 1) {
-//        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID}, ${val})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
-//    } else {
-//		score = -1
-//		console.log('GOT UNKNOWN VAL')
-//        mainRegionHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID}, ${val})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
-//    }
-
-
     mainRegionHTML += '<div id="mainBox" class="mainbox"><pre>Here is the main text</pre></div>';
     mainRegionHTML += '<div id="labelNamedEntities"></div>'
     mainRegionHTML += '<br><br>showing passage <span id="passageID" class="docInfoSpan" >0</span> of document <span id="docID" class="docInfoSpan" >0</span> out of <span id="totalDocs" class="docInfoSpan" >0</span>.';
     mainRegionHTML += '&nbsp;&nbsp;&nbsp;&nbsp;PMID: <span id="pmid" class="docInfoSpan" >N.A.</span>&nbsp;&nbsp;&nbsp;&nbsp;PMCID: <span id="pmcid" class="docInfoSpan" >N.A.</span></p>';
-    //console.log(mainRegionHTML);
     document.getElementById('mainRegion').innerHTML = mainRegionHTML;
     //Gets score and displays doc info
     updateScore();
@@ -388,29 +313,7 @@ function displayDocumentInfo(score) {
         labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID}, ${score})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
     }
 
-//    let note_path = inputJsonObject[docID].title;
-//    let evaluator = document.getElementById('name').value;
-//    $.getJSON($SCRIPT_ROOT + '/get_score', {
-//        path: note_path,
-//        evaluator: evaluator
-//        }, function(response) {
-//	    console.log(response.score);
-//            console.log('GET successful');
-//            var val = response.score
-//            if (val == 0) {
-//                labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID}, ${val})" class="yesNoUnk noLabel">N</span></div><br><br>`;
-//            } else if (val == 1) {
-//                labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID}, ${val})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
-//            } else {
-//                labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID}, -1)" class="yesNoUnk unkLabel">?</span></div><br><br>`;
-//            }
-//        });
-
-    //console.log("doc HTML before adding label");
-    //console.log(document.getElementById('mainRegion').innerHTML);
     document.getElementById('docLabel').innerHTML = labelHTML;
-    //console.log("doc HTML after adding label");
-    //console.log(document.getElementById('mainRegion').innerHTML);
 }
 
 function clearHTMLAfterResetSelection() {
@@ -499,10 +402,6 @@ function displayLabelButtons() {
 
 }
 
-//function addDocumentAnnotation(annotationVal) {
-//    inputJsonObject[docID].note_val = annotationVal
-//}
-//
 function changeDocStatus(docID, current_score) {
 
     var note_path = inputJsonObject[docID].source_file
@@ -526,22 +425,11 @@ function changeDocStatus(docID, current_score) {
     $.getJSON($SCRIPT_ROOT + '/set_score', {
         path: note_path,
         evaluator: evaluator,
-	score: new_score
+	    score: new_score
         }, function(response) {
-	    //console.log(response.score);
             console.log('Updated Score');
- 	    updateScore();
-            //displayDocumentInfo(response.score)
+ 	        updateScore();
         });
-/*
-    $.post($SCRIPT_ROOT + '/set_score', {"data" : JSON.stringify({
-        path: note_path,
-        evaluator: evaluator,
-        score: new_score
-    })});*/
-
-    //updateScore();
-    //return;
 }
 
 function addNamedEntityAnnotation(entityType) {
