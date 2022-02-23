@@ -13,8 +13,8 @@ cur.execute("INSERT INTO notes (file_path, patient_id) VALUES (?, ?)",
 cur.execute("INSERT INTO notes (file_path, patient_id) VALUES (?, ?)",
             ("/home/nixona2/scripted_final/FolderOutput.json", "Z123117"))
 
-cur.execute("INSERT INTO scores (evaluator, note_id, file_path, score) VALUES (?, ?, ?, ?)",
-            ("Anna", 39484013, "/home/nixona2/scripted_preprocess/39484013.txt", 1))
+cur.execute("INSERT INTO scores (evaluator, file_path, score) VALUES (?, ?, ?)",
+            ("Anna", "/home/nixona2/scripted_preprocess/39484013.txt", 1))
 
 connection.commit()
 connection.close()

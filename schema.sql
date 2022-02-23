@@ -8,8 +8,8 @@ CREATE TABLE notes (
 
 CREATE TABLE scores (
     evaluator VARCHAR(20),
-    note_id INTEGER,
+--    note_id INTEGER,
     file_path TEXT NOT NULL,
     SCORE INTEGER,
-    PRIMARY KEY (evaluator, note_id)
+    PRIMARY KEY (evaluator, file_path)
 );
