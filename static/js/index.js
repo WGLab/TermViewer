@@ -272,7 +272,7 @@ function initMainRegion() {
    
     console.log('Initiating main region');
 
-    mainRegionHTML += '<div id="mainBox" class="mainbox"><pre>Here is the main text</pre></div>';
+    mainRegionHTML += '<pre><div id="mainBox" class="mainbox">Here is the main text</div></pre>';
     mainRegionHTML += '<div id="labelNamedEntities"></div>'
     mainRegionHTML += '<br><br>showing passage <span id="passageID" class="docInfoSpan" >0</span> of document <span id="docID" class="docInfoSpan" >0</span> out of <span id="totalDocs" class="docInfoSpan" >0</span>.';
     //mainRegionHTML += '&nbsp;&nbsp;&nbsp;&nbsp;PMID: <span id="pmid" class="docInfoSpan" >N.A.</span>&nbsp;&nbsp;&nbsp;&nbsp;PMCID: <span id="pmcid" class="docInfoSpan" >N.A.</span></p>';
