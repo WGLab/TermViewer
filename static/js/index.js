@@ -166,7 +166,7 @@ function preprocessingInputJsonObject(inputJsonObject) {
 
     let type;
     let count;
-    let namedEntityTypeSelectionInfo = "<h3>Please check the named entity types that you want to highlight (<=7 types): </h3>";
+    let namedEntityTypeSelectionInfo = "<h3>Please check the named entity types that you want to highlight: </h3>";
     for (type in allNamedEntityTypeDict) {
         allNamedEntityTypeList.push(type);
     }
@@ -262,10 +262,10 @@ function initMainRegion() {
 
 
     mainRegionHTML += '<button class="largeButton" id="buttonPrev" onclick="buttonPrevClicked()">&#10094;   Previous passage</button> &nbsp;&nbsp;';
-    mainRegionHTML += '<button class="largeButton " id="buttonReset" onclick="buttonResetClicked()">Reset passage</button> &nbsp;&nbsp;';
-    mainRegionHTML += '<button class="largeButton" id="buttonNext" onclick="buttonNextClicked()" >Next passage  &#10095;</button>';
-    mainRegionHTML += '&nbsp;&nbsp; <button class="largeButton" id="buttonNext" onclick="buttonSaveClicked()" >Save</button><br><br>';
-    mainRegionHTML += '<strong>Title: <span id="docTitle"></span></strong><br><br>';
+    //mainRegionHTML += '<button class="largeButton " id="buttonReset" onclick="buttonResetClicked()">Reset passage</button> &nbsp;&nbsp;';
+    mainRegionHTML += '<button class="largeButton" id="buttonNext" onclick="buttonNextClicked()" >Next passage  &#10095;</button><br><br>';
+    //mainRegionHTML += '&nbsp;&nbsp; <button class="largeButton" id="buttonNext" onclick="buttonSaveClicked()" >Save</button><br><br>';
+    mainRegionHTML += '<strong><span id="docTitle"></span></strong><br><br>';
     //Create tag
     mainRegionHTML += '<strong> Is this a good note? </strong>';
     mainRegionHTML += '<div id="docLabel"></div>';
@@ -275,7 +275,7 @@ function initMainRegion() {
     mainRegionHTML += '<div id="mainBox" class="mainbox"><pre>Here is the main text</pre></div>';
     mainRegionHTML += '<div id="labelNamedEntities"></div>'
     mainRegionHTML += '<br><br>showing passage <span id="passageID" class="docInfoSpan" >0</span> of document <span id="docID" class="docInfoSpan" >0</span> out of <span id="totalDocs" class="docInfoSpan" >0</span>.';
-    mainRegionHTML += '&nbsp;&nbsp;&nbsp;&nbsp;PMID: <span id="pmid" class="docInfoSpan" >N.A.</span>&nbsp;&nbsp;&nbsp;&nbsp;PMCID: <span id="pmcid" class="docInfoSpan" >N.A.</span></p>';
+    //mainRegionHTML += '&nbsp;&nbsp;&nbsp;&nbsp;PMID: <span id="pmid" class="docInfoSpan" >N.A.</span>&nbsp;&nbsp;&nbsp;&nbsp;PMCID: <span id="pmcid" class="docInfoSpan" >N.A.</span></p>';
     document.getElementById('mainRegion').innerHTML = mainRegionHTML;
     //Gets score and displays doc info
     updateScore();
@@ -287,6 +287,7 @@ function displayDocumentInfo(score) {
     document.getElementById('docID').innerHTML = (docID + 1).toString();
     document.getElementById('totalDocs').innerHTML = (totalDocs + 1).toString();
 
+    /*
     let pmid = inputJsonObject[docID].pmid.toString();
     let pmcid = inputJsonObject[docID].pmcid.toString();
     if (pmid) {
@@ -299,7 +300,7 @@ function displayDocumentInfo(score) {
         document.getElementById('pmcid').innerHTML = `<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/${pmcid}/" target="Blank">${pmcid}</a>`;
     } else {
         document.getElementById('pmcid').innerHTML = 'N.A.';
-    }
+    }*/
 
     let labelHTML = "";
 
@@ -339,6 +340,7 @@ function display1PassageInMainBox() {
     let segId = 0;
     let entityType;
     let typeId;
+    let entityTooltip;
     segOffsetList = [];
     for (let entityId = 0; entityId < inputJsonObject[docID].passage_list[passageID].named_entity_list.length; entityId++) {
         entityType = inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].type;
@@ -358,6 +360,8 @@ function display1PassageInMainBox() {
         segId += 1;
         segOffsetList.push(plainTextStartPos);
         entityText = passageText.substring(entityStartPos, entityEndPos);
+        entityTooltip = inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].identifier;
+        /*
         let yesNoLabel = '';
         if (inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status == 'false') {
             yesNoLabel = `<span onclick="changeEntityStatus(${entityId}, del=false)" class="yesNoUnk noLabel">N</span>`;
@@ -368,8 +372,8 @@ function display1PassageInMainBox() {
         }
 
         let trash_button = `<i class="fa fa-trash trashButton" onclick="changeEntityStatus(${entityId}, del=true)"></i>`;
-
-        highlightedText += `<mark class="namedEntity color${typeId}" id="seg_${segId}">${yesNoLabel}${entityText}${trash_button}</mark>`;
+        */
+        highlightedText += `<mark class="namedEntity color${typeId} tooltip" id="seg_${segId}">${entityText}<span class="tooltiptext">${entityTooltip}</span></mark>`;
         segId += 1;
         segOffsetList.push(entityStartPos);
 
@@ -394,10 +398,10 @@ function displayLabelButtons() {
 
     let typeId;
     let entityType;
-    document.getElementById('labelNamedEntities').innerHTML = '<h3>To add an annotation, select the text in the above box and then click the corresponding button:</h3>';
+    //document.getElementById('labelNamedEntities').innerHTML = '<h3>To add an annotation, select the text in the above box and then click the corresponding button:</h3>';
     for (entityType in highlightedNamedEntityTypeDict) {
         typeId = highlightedNamedEntityTypeDict[entityType];
-        document.getElementById('labelNamedEntities').innerHTML += `<button class="namedEntityButton color${typeId}" id="buttonLabelNamedEntity${typeId}" onclick="addNamedEntityAnnotation('${entityType}')">${entityType}</button> &nbsp; &nbsp; &nbsp; &nbsp;`;
+        document.getElementById('labelNamedEntities').innerHTML += `<button class="namedEntityButton color${typeId}" id="buttonLabelNamedEntity${typeId}" >${entityType}</button> &nbsp; &nbsp; &nbsp; &nbsp;`;
     }
 
 }
