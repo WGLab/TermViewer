@@ -49,7 +49,7 @@ def read_mm(fp, txt_f):
                 if phrase["Mappings"]:
                     for mapping in phrase["Mappings"]:
                         for mc in mapping["MappingCandidates"]:
-                            if mc["Negated"] != 1:
+                            if mc["Negated"] !="1":
                                 # Add matched words to return
                                 umls_id = mc["CandidateCUI"]
                                 begin = doc_pos + int(mc["ConceptPIs"][0]["StartPos"])
@@ -58,8 +58,8 @@ def read_mm(fp, txt_f):
                                 if umls_id in umls_conv:
                                     mm_dict[(begin, length)] = {"umls_id": umls_id,
                                                                 "word": txt_f[begin:end].lower(),
-                                                                "hpo id": umls_conv[umls_id]['HPO ID'],
-                                                                "hpo term": umls_conv[umls_id]['Description']}
+                                                                "hpo_id": umls_conv[umls_id]['HPO ID'],
+                                                                "hpo_term": umls_conv[umls_id]['Description']}
             #Track position of utterance
             if int(utterance["UttNum"]) == 1:
                 utt_pos += int(utterance["UttStartPos"])
@@ -81,7 +81,7 @@ def read_ctakes(f, txt_f):
     s = tree.findall('.//textsem:SignSymptomMention', names)
     all_terms = d + s
     for p in all_terms:
-        if p.attrib['polarity'] != -1:
+        if p.attrib['polarity'] != "-1":
             # Find indices
             begin = int(p.attrib['begin'])
             end = int(p.attrib['end'])
@@ -95,8 +95,8 @@ def read_ctakes(f, txt_f):
             for r in umls_refs:
                 if r in umls_conv:
                     ctakes_dict[(begin, length)] = {"umls_id": r, "word": txt_f[begin:end].lower(),
-                                                    "hpo id": umls_conv[r]["HPO ID"],
-                                                    "hpo term": umls_conv[r]["Description"]}
+                                                    "hpo_id": umls_conv[r]["HPO ID"],
+                                                    "hpo_term": umls_conv[r]["Description"]}
     return ctakes_dict
 
 # Creates JSON file that can be uploaded into Term Viewer
@@ -114,29 +114,29 @@ def createJSON(txt_fp, mm_fp, ctakes_fp, out_fp, doc_name):
             ne_list.append({"py/object": "document.NamedEntity",
                             "type": "MetaMap and cTakes",
                             "text": "general",
-                            "identifier": mm_dict[word]["umls_id"],
+                            "identifier": mm_dict[word]["hpo_id"],
                             "offset": word[0],
                             "length": word[1],
-                            "description": "*",
+                            "description": mm_dict[word]["hpo_term"],
                             "algorithm": "MetaMap and cTakes"})
         else:
             ne_list.append({"py/object": "document.NamedEntity",
                             "type": "MetaMap",
                             "text": "general",
-                            "identifier": mm_dict[word]["umls_id"],
+                            "identifier": mm_dict[word]["hpo_id"],
                             "offset": word[0],
                             "length": word[1],
-                            "description": "*",
+                            "description": mm_dict[word]["hpo_term"],
                             "algorithm": "MetaMap"})
     for word in ctakes_dict:
         if word not in mm_dict:
             ne_list.append({"py/object": "document.NamedEntity",
                             "type": "CTakes",
                             "text": "general",
-                            "identifier": ctakes_dict[word]["umls_id"],
+                            "identifier": ctakes_dict[word]["hpo_id"],
                             "offset": word[0],
                             "length": word[1],
-                            "description": "*",
+                            "description": ctakes_dict[word]["hpo_term"],
                             "algorithm": "MetaMap"})
     output = [{"py/object": "document.Document",
                "data_struct_version": 1.0,
