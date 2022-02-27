@@ -15,7 +15,8 @@ ctakes_fp = "C:/Users/nixona2/Documents/test_notes/ctakes_pre/"
 storage_fp = "C:/Users/nixona2/Documents/test_notes/out_pre/"
 # Location of umls term dictionary (MRCONSO.RRF)
 umls_fp = "C:/Users/nixona2/Documents/MRCONSO.RRF"
-
+# Name of final JSON file
+output_name = "FolderOutput"
 # Set to true to test on a single file
 single_file = False
 test_filename = "10147920"
@@ -240,6 +241,15 @@ def createEntry(txt_fp, mm_fp, ctakes_fp, doc_name):
 
 print(sys.argv)
 #Check for commandline arguments
+if len(sys.argv) == 7:
+    print("LOADING ARGS")
+    umls_fp = sys.argv[1]
+    txt_fp = sys.argv[2]
+    ctakes_fp = sys.argv[3]
+    mm_fp = sys.argv[4]
+    storage_fp = sys.argv[5]
+    output_name = sys.argv[6]
+
 if len(sys.argv) == 6:
     print("LOADING ARGS")	
     umls_fp = sys.argv[1]
@@ -260,5 +270,5 @@ else:
     for file in files:
         print(file)
         output.append(createEntry(txt_fp, mm_fp, ctakes_fp, file))
-    with open(storage_fp + "FolderOutput" + ".json", 'w') as f:
+    with open(storage_fp + output_name + ".json", 'w') as f:
         json.dump(output, f)
