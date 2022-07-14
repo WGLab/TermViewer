@@ -28,7 +28,7 @@ This script will preprocess all input notes in the specified folder, run MetaMap
 
 After the script has finished executing the results can be visualized by running the web application 
 
-To begin navigate to the TermViewer directory on your server. Make sure you have miniconda or anaconda installed. Then create a new environment using the .yml file from the repository and the following command: 
+To begin navigate to the TermViewer directory on your server. Make sure you have miniconda or anaconda installed (if not, you can go to [here](https://docs.conda.io/en/latest/miniconda.html) to download the appropriate version and install). Then create a new environment using the .yml file from the repository and the following command: 
 
 ```
 conda env create --name [envname] -f viewerenv.yml
