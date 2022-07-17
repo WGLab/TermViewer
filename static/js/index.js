@@ -81,6 +81,7 @@ function loadInputJsonFile(event) {
     document.getElementById('namedEntityTypeSelection').innerHTML = '';
     document.getElementById('showColor').innerHTML = '';
     document.getElementById('mainRegion').innerHTML = '';
+    document.getElementById('start_btn').style.display = 'none';
 
     docID = 0;
     passageID = 0;
@@ -100,6 +101,8 @@ function loadInputJsonFile(event) {
             inputJsonObject = JSON.parse(response.result);
             preprocessingInputJsonObject(inputJsonObject);
         });
+
+
 }
 
 function preprocessingInputJsonObject(inputJsonObject) {
@@ -495,4 +498,5 @@ function changeEntityStatus(entityId, del = false) {
     return;
 }
 
-document.getElementById('patient_file').addEventListener('change', loadInputJsonFile);
+document.getElementById('start_btn').addEventListener('click', loadInputJsonFile);
+//document.getElementById('patient_file').addEventListener('change', loadInputJsonFile);
