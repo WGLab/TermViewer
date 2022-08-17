@@ -13,3 +13,12 @@ CREATE TABLE scores (
     SCORE INTEGER,
     PRIMARY KEY (evaluator, file_path)
 );
+
+CREATE TABLE tags (
+    evaluator VARCHAR(20),
+    file_path TEXT NOT NULL,
+    offset INTEGER,
+    tag_length INTEGER,
+    SCORE INTEGER,
+    PRIMARY KEY (evaluator, file_path, offset, tag_length)
+);
