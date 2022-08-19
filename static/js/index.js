@@ -4,6 +4,7 @@ var docID = 0;
 let passageID = 0;
 let totalDocs = 0;
 
+let enableTagEdit = true;
 let inputFileString = '';
 let inputJsonObject = '';
 let highlightedNamedEntityTypeDict = new Object();
@@ -54,7 +55,7 @@ function buttonNextClicked() {
     } else if (docID + 1 < inputJsonObject.length) {
         docID += 1;
         passageID = 0;
-	updateScore();
+	    updateScore();
         display1PassageInMainBox();
     } else {
         alert("This is the last passage!");
@@ -81,6 +82,7 @@ function loadInputJsonFile(event) {
     document.getElementById('namedEntityTypeSelection').innerHTML = '';
     document.getElementById('showColor').innerHTML = '';
     document.getElementById('mainRegion').innerHTML = '';
+    document.getElementById('start_btn').style.display = 'none';
 
     docID = 0;
     passageID = 0;
@@ -100,6 +102,8 @@ function loadInputJsonFile(event) {
             inputJsonObject = JSON.parse(response.result);
             preprocessingInputJsonObject(inputJsonObject);
         });
+
+
 }
 
 function preprocessingInputJsonObject(inputJsonObject) {
@@ -166,7 +170,7 @@ function preprocessingInputJsonObject(inputJsonObject) {
 
     let type;
     let count;
-    let namedEntityTypeSelectionInfo = "<h3>Please check the named entity types that you want to highlight (<=7 types): </h3>";
+    let namedEntityTypeSelectionInfo = "<h3>Please check the named entity types that you want to highlight: </h3>";
     for (type in allNamedEntityTypeDict) {
         allNamedEntityTypeList.push(type);
     }
@@ -254,6 +258,22 @@ function updateScore() {
         });
 }
 
+function updateTagScore(entityId, offset, length) {
+    let note_path = inputJsonObject[docID].source_file;
+    let evaluator = document.getElementById('name').value;
+
+    $.getJSON($SCRIPT_ROOT + '/get_tag_score', {
+        path: note_path,
+        evaluator: evaluator,
+        offset: offset,
+        tag_length: length
+        }, function(response) {
+	    console.log(response.score);
+            console.log('GET successful');
+            displayTagInfo(entityId, offset, length, response.score)
+        });
+}
+
 function initMainRegion() {
     docID = 0;
     passageID = 0;
@@ -262,20 +282,20 @@ function initMainRegion() {
 
 
     mainRegionHTML += '<button class="largeButton" id="buttonPrev" onclick="buttonPrevClicked()">&#10094;   Previous passage</button> &nbsp;&nbsp;';
-    mainRegionHTML += '<button class="largeButton " id="buttonReset" onclick="buttonResetClicked()">Reset passage</button> &nbsp;&nbsp;';
-    mainRegionHTML += '<button class="largeButton" id="buttonNext" onclick="buttonNextClicked()" >Next passage  &#10095;</button>';
-    mainRegionHTML += '&nbsp;&nbsp; <button class="largeButton" id="buttonNext" onclick="buttonSaveClicked()" >Save</button><br><br>';
-    mainRegionHTML += '<strong>Title: <span id="docTitle"></span></strong><br><br>';
+    //mainRegionHTML += '<button class="largeButton " id="buttonReset" onclick="buttonResetClicked()">Reset passage</button> &nbsp;&nbsp;';
+    mainRegionHTML += '<button class="largeButton" id="buttonNext" onclick="buttonNextClicked()" >Next passage  &#10095;</button><br><br>';
+    //mainRegionHTML += '&nbsp;&nbsp; <button class="largeButton" id="buttonNext" onclick="buttonSaveClicked()" >Save</button><br><br>';
+    mainRegionHTML += '<strong><span id="docTitle"></span></strong><br><br>';
     //Create tag
     mainRegionHTML += '<strong> Is this a good note? </strong>';
     mainRegionHTML += '<div id="docLabel"></div>';
    
     console.log('Initiating main region');
 
-    mainRegionHTML += '<div id="mainBox" class="mainbox"><pre>Here is the main text</pre></div>';
+    mainRegionHTML += '<pre><div id="mainBox" class="mainbox">Here is the main text</div></pre>';
     mainRegionHTML += '<div id="labelNamedEntities"></div>'
     mainRegionHTML += '<br><br>showing passage <span id="passageID" class="docInfoSpan" >0</span> of document <span id="docID" class="docInfoSpan" >0</span> out of <span id="totalDocs" class="docInfoSpan" >0</span>.';
-    mainRegionHTML += '&nbsp;&nbsp;&nbsp;&nbsp;PMID: <span id="pmid" class="docInfoSpan" >N.A.</span>&nbsp;&nbsp;&nbsp;&nbsp;PMCID: <span id="pmcid" class="docInfoSpan" >N.A.</span></p>';
+    //mainRegionHTML += '&nbsp;&nbsp;&nbsp;&nbsp;PMID: <span id="pmid" class="docInfoSpan" >N.A.</span>&nbsp;&nbsp;&nbsp;&nbsp;PMCID: <span id="pmcid" class="docInfoSpan" >N.A.</span></p>';
     document.getElementById('mainRegion').innerHTML = mainRegionHTML;
     //Gets score and displays doc info
     updateScore();
@@ -287,20 +307,6 @@ function displayDocumentInfo(score) {
     document.getElementById('docID').innerHTML = (docID + 1).toString();
     document.getElementById('totalDocs').innerHTML = (totalDocs + 1).toString();
 
-    let pmid = inputJsonObject[docID].pmid.toString();
-    let pmcid = inputJsonObject[docID].pmcid.toString();
-    if (pmid) {
-        document.getElementById('pmid').innerHTML = `<a href="https://pubmed.ncbi.nlm.nih.gov/${pmid}/" target="Blank">${pmid}</a>`;
-    } else {
-        document.getElementById('pmid').innerHTML = 'N.A.';
-    }
-
-    if (pmcid) {
-        document.getElementById('pmcid').innerHTML = `<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/${pmcid}/" target="Blank">${pmcid}</a>`;
-    } else {
-        document.getElementById('pmcid').innerHTML = 'N.A.';
-    }
-
     let labelHTML = "";
 
     if (score == 0) {
@@ -309,6 +315,7 @@ function displayDocumentInfo(score) {
         labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID}, ${score})" class="yesNoUnk yesLabel">Y</span></div><br><br>`;
     } else {
 		score = -1
+
 		console.log('GOT UNKNOWN VAL')
         labelHTML += `<span id="docAnnotation" onclick="changeDocStatus(${docID}, ${score})" class="yesNoUnk unkLabel">?</span></div><br><br>`;
     }
@@ -326,6 +333,22 @@ function compareStartPosition(a, b) {
     if (b.start > a.start) return -1;
 }
 
+function displayTagInfo(id, entityStartPos, entityEndPos, score) {
+    let yesNoLabel = '';
+    if (score == 0) {
+        yesNoLabel = `N`;
+    } else if (score == 1) {
+        yesNoLabel = `Y`;
+    } else {
+		score = -1
+
+		console.log('GOT UNKNOWN VAL')
+        yesNoLabel = `?`;
+    }
+    console.log(`tag_${id}`);
+    document.getElementById(`tag_${id}`).innerHTML = `<span onclick="changeEntityStatus(${id}, ${entityStartPos}, ${entityEndPos}, ${score})" class="yesNoUnk unkLabel">${yesNoLabel}</span>`;
+}
+
 function display1PassageInMainBox() {
 
     let passageText = inputJsonObject[docID].passage_list[passageID].passage_text;
@@ -339,6 +362,7 @@ function display1PassageInMainBox() {
     let segId = 0;
     let entityType;
     let typeId;
+    let entityTooltip;
     segOffsetList = [];
     for (let entityId = 0; entityId < inputJsonObject[docID].passage_list[passageID].named_entity_list.length; entityId++) {
         entityType = inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].type;
@@ -358,18 +382,27 @@ function display1PassageInMainBox() {
         segId += 1;
         segOffsetList.push(plainTextStartPos);
         entityText = passageText.substring(entityStartPos, entityEndPos);
-        let yesNoLabel = '';
-        if (inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status == 'false') {
-            yesNoLabel = `<span onclick="changeEntityStatus(${entityId}, del=false)" class="yesNoUnk noLabel">N</span>`;
-        } else if (inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status == 'true') {
-            yesNoLabel = `<span onclick="changeEntityStatus(${entityId}, del=false)" class="yesNoUnk yesLabel">Y</span>`;
+        entityTooltip = inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].identifier;
+
+
+//        if (inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status == 'false') {
+//            yesNoLabel = `<span onclick="changeEntityStatus(${entityId}, del=false)" class="yesNoUnk noLabel">N</span>`;
+//        } else if (inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status == 'true') {
+//            yesNoLabel = `<span onclick="changeEntityStatus(${entityId}, del=false)" class="yesNoUnk yesLabel">Y</span>`;
+//        } else {
+//            yesNoLabel = `<span onclick="changeEntityStatus(${entityId}, del=false)" class="yesNoUnk unkLabel">?</span>`;
+//        }
+
+        //let trash_button = `<i class="fa fa-trash trashButton" onclick="changeEntityStatus(${entityId}, del=true)"></i>`;
+
+        if(enableTagEdit){
+//            let yesNoLabel = `<span onclick="changeEntityStatus(${entityId}, ${entityStartPos}, ${entityEndPos})" class="yesNoUnk unkLabel">?</span>`;
+            highlightedText += `<mark class="namedEntity color${typeId}" id="seg_${segId}"><span id="tag_${entityId}"></span>${entityText}</mark>`;
+            updateTagScore(entityId, entityStartPos, entityEndPos);
         } else {
-            yesNoLabel = `<span onclick="changeEntityStatus(${entityId}, del=false)" class="yesNoUnk unkLabel">?</span>`;
+            highlightedText += `<mark class="namedEntity color${typeId} tooltip" id="seg_${segId}">${entityText}<span class="tooltiptext">${entityTooltip}</span></mark>`;
         }
-
-        let trash_button = `<i class="fa fa-trash trashButton" onclick="changeEntityStatus(${entityId}, del=true)"></i>`;
-
-        highlightedText += `<mark class="namedEntity color${typeId}" id="seg_${segId}">${yesNoLabel}${entityText}${trash_button}</mark>`;
+        //highlightedText += `<mark class="namedEntity color${typeId} tooltip" id="seg_${segId}">${entityText}<span class="tooltiptext">${entityTooltip}</span></mark>`;
         segId += 1;
         segOffsetList.push(entityStartPos);
 
@@ -378,6 +411,7 @@ function display1PassageInMainBox() {
             alert('ERROR! end position of named entity is larger than text length!')
             return;
         }
+
     }
     if (plainTextStartPos < passageText.length) {
         plainText = passageText.substring(plainTextStartPos);
@@ -394,10 +428,10 @@ function displayLabelButtons() {
 
     let typeId;
     let entityType;
-    document.getElementById('labelNamedEntities').innerHTML = '<h3>To add an annotation, select the text in the above box and then click the corresponding button:</h3>';
+    document.getElementById('labelNamedEntities').innerHTML = '<h3>All tags are from the sources below:</h3>';
     for (entityType in highlightedNamedEntityTypeDict) {
         typeId = highlightedNamedEntityTypeDict[entityType];
-        document.getElementById('labelNamedEntities').innerHTML += `<button class="namedEntityButton color${typeId}" id="buttonLabelNamedEntity${typeId}" onclick="addNamedEntityAnnotation('${entityType}')">${entityType}</button> &nbsp; &nbsp; &nbsp; &nbsp;`;
+        document.getElementById('labelNamedEntities').innerHTML += `<button class="namedEntityButton color${typeId}" id="buttonLabelNamedEntity${typeId}" >${entityType}</button> &nbsp; &nbsp; &nbsp; &nbsp;`;
     }
 
 }
@@ -470,25 +504,60 @@ function addNamedEntityAnnotation(entityType) {
     display1PassageInMainBox();
 }
 
-function changeEntityStatus(entityId, del = false) {
-    if (del) {
-        if (confirm("Are you sure to delete this entity? This action cannot be undone.")) {
-            inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status = 'deleted';
-        } else {
-            return;
-        }
-    } else if (inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status == 'true') {
-        inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status = 'false';
-    } else if (inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status == 'unknown') {
-        inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status = 'true';
-    } else if (inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status == 'false') {
-        inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status = 'unknown';
+function changeEntityStatus(entityId, offset, length, current_score) {
+
+    var note_path = inputJsonObject[docID].source_file
+    var evaluator = document.getElementById('name').value
+    var new_score;
+
+    if (current_score == 1) {
+        new_score = 0;
+    } else if (current_score == -1) {
+        new_score = 1;
+    } else if (current_score == 0) {
+        new_score = -1;
     } else {
         alert('ERROR! unknown entity status!');
     }
 
-    display1PassageInMainBox();
-    return;
+    console.log(note_path);
+    console.log(evaluator);
+    console.log(new_score);
+    console.log(offset);
+    console.log(length);
+
+    $.getJSON($SCRIPT_ROOT + '/set_tag_score', {
+        path: note_path,
+        evaluator: evaluator,
+        offset: offset,
+        tag_length: length,
+	    score: new_score
+        }, function(response) {
+            console.log('Updated Score');
+ 	        updateTagScore(entityId, offset, length);
+        });
 }
 
-document.getElementById('patient_file').addEventListener('change', loadInputJsonFile);
+//function changeEntityStatus(entityId, del = false) {
+//    if (del) {
+//        if (confirm("Are you sure to delete this entity? This action cannot be undone.")) {
+//            inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status = 'deleted';
+//        } else {
+//            return;
+//        }
+//    } else if (inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status == 'true') {
+//        inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status = 'false';
+//    } else if (inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status == 'unknown') {
+//        inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status = 'true';
+//    } else if (inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status == 'false') {
+//        inputJsonObject[docID].passage_list[passageID].named_entity_list[entityId].status = 'unknown';
+//    } else {
+//        alert('ERROR! unknown entity status!');
+//    }
+//
+//    display1PassageInMainBox();
+//    return;
+//}
+
+document.getElementById('start_btn').addEventListener('click', loadInputJsonFile);
+//document.getElementById('patient_file').addEventListener('change', loadInputJsonFile);

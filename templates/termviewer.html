@@ -18,7 +18,7 @@
 </div>
 <div class="container">
     <h3 style="text-align: center">A Visualization Tool for HPO Terms</h3>
-    <label for="name">Evaluator name:</label>
+    <center><label for="name">Evaluator name:</label>
     <input type="text" id="name" name="fname">
     <h2> Choose the patient noteset you would like to annotate:<SELECT id="patient_file">
         {% for patient in patients %}
@@ -26,6 +26,7 @@
         {% endfor %}
     </SELECT>
     </h2>
+    <button type="button" id="start_btn">Click to Start</button></center>
     <div id="namedEntityTypeSelection"></div>
     <div id="showColor"></div>
     <div id="mainRegion"></div>

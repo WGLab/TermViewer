@@ -34,6 +34,20 @@ def get_score():
         return jsonify(score=-1)
     return jsonify(score=int(score[0]))
 
+@app.route('/get_tag_score', methods=['GET', 'POST'])
+def get_tag_score():
+    note_path = request.args.get('path')
+    evaluator = request.args.get('evaluator')
+    offset = request.args.get('offset')
+    tag_length = request.args.get('tag_length')
+    conn = get_db_connection()
+    score = conn.execute('SELECT score FROM tags WHERE evaluator = ? AND file_path = ? AND offset = ? AND tag_length = ?',
+                         (evaluator, note_path, offset, tag_length)).fetchone()
+    conn.close()
+    if score is None:
+        return jsonify(score=-1)
+    return jsonify(score=int(score[0]))
+
 #Updates score if it exists in database or creates new entry
 #Requires path to original patient note, evaluator, and score
 @app.route('/set_score', methods=['GET', 'POST'])
@@ -52,6 +66,32 @@ def set_score():
     else:
         cursor.execute('UPDATE scores SET score = ? WHERE evaluator = ? AND file_path = ?',
                      (score, evaluator, note_path))
+        conn.commit()
+    conn.close()
+    if current_val: current_val = int(current_val[0])
+    return jsonify(prev_score=current_val)
+
+#[SANME FOR TAG] Requires path to original patient note, evaluator, and score
+@app.route('/set_tag_score', methods=['GET', 'POST'])
+def set_tag_score():
+    note_path = request.args.get('path')
+    evaluator = request.args.get('evaluator')
+    offset = request.args.get('offset')
+    tag_length = request.args.get('tag_length')
+    score = request.args.get('score')
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    current_val = conn.execute('SELECT score FROM tags WHERE evaluator = ? AND file_path = ? AND offset = ? AND tag_length = ?',
+                         (evaluator, note_path, offset, tag_length)).fetchone()
+    if current_val is None:
+        print(offset)
+        print(tag_length)
+        cursor.execute("INSERT INTO tags (evaluator, file_path, offset, tag_length, score) VALUES (?, ?, ?, ?, ?)",
+                     (evaluator, note_path, offset, tag_length, score))
+        conn.commit()
+    else:
+        cursor.execute('UPDATE tags SET score = ? WHERE evaluator = ? AND file_path = ? AND offset = ? AND tag_length = ?',
+                     (score, evaluator, note_path, offset, tag_length))
         conn.commit()
     conn.close()
     if current_val: current_val = int(current_val[0])
