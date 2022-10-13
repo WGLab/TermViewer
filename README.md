@@ -58,7 +58,7 @@ Once the database is ready you can start the webapp
 flask run
 ```
 
-The console will print out the address the application is running on (usually localhost:5000). You can either view it directly or set up port tunneling to view from another device. 
+The console will print out the address the application is running on (usually localhost:5000). You can either view it directly or set up port tunneling to view from another device. A demo server is set up at http://termviewer.wglab.org/.
 
 You should see the following screen asking for an evaluator name and with a dropdown containing the list of patient notesets that you have stored in the notes table of the database. Scores are stored based on evaluator and note so enter a name to access the annotations specific to you and then select a noteset to navigate. 
 
