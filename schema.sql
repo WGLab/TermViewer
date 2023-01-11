@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS notes;
 DROP TABLE IF EXISTS scores;
+DROP TABLE IF EXISTS tags;
 
 CREATE TABLE notes (
     file_path TEXT PRIMARY KEY,
